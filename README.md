@@ -2,7 +2,7 @@
 
 Welcome! This repository documents my hands-on journey through building a **serverless employee directory web application** on AWS. The goal is to apply cloud infrastructure skills by building a real project step-by-step, aligned with AWS best practices.
 
-![Screenshot 2025-07-04 at 17 10 08](https://github.com/user-attachments/assets/03ec2298-d8b1-4144-8d30-c34142ee9b74)
+![Screenshot 2025-07-04 at 17 10 28](https://github.com/user-attachments/assets/3a172a99-9d79-4e7b-ba6a-a8c6d633c709)
 
 
 ---

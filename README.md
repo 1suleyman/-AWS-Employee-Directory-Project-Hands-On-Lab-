@@ -24,25 +24,27 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
-### 🔐 Module 1: Identity and Access Management (Complete)
+#### 🔧 IAM Setup
+- [ ] Enable **MFA for the AWS root user**
+- [ ] Create IAM **admin user** (e.g. `AdminUser`)
+- [ ] Create IAM **group** (e.g. `EC2Admins`)
+- [ ] Attach `AmazonEC2FullAccess` policy to the group
+- [ ] Add `AdminUser` to the group
 
-#### ✅ Topics Covered:
-- Protecting the AWS Root User
-- AWS Identity and Access Management
-- IAM Policies, Groups, Users
-- IAM Roles for EC2
-- Access Key Management
-- Demonstration: Implementing Security with IAM
+#### 🧭 IAM Roles
+- [ ] Create IAM **role** (`EmployeeWebAppRole`)
+- [ ] Trusted entity type: `EC2`
+- [ ] Attach managed policies:
+  - [ ] `AmazonS3FullAccess`
+  - [ ] `AmazonDynamoDBFullAccess`
+- [ ] Review trust relationship: allow only EC2 to assume role
 
-#### 🧱 Tasks Completed:
-- [x] Enabled MFA for Root User
-- [x] Created Admin IAM User & Group (`EC2Admins`)
-- [x] Attached `AmazonEC2FullAccess` to Group
-- [x] Created `EmployeeWebAppRole` for EC2 with:
-  - `AmazonS3FullAccess`
-  - `AmazonDynamoDBFullAccess`
-- [x] Created IAM user for CLI with programmatic access keys
-- [x] Deleted access key after demonstration
+#### 🔑 IAM Users & Access Keys
+- [ ] Create **developer IAM user** (e.g. `DevUser`)
+- [ ] Enable console access and force password reset
+- [ ] Add user to `EC2Admins` group
+- [ ] Create programmatic access keys for AWS CLI use
+- [ ] ✅ Delete keys after testing (demo only)
 
 ---
 

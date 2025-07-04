@@ -48,7 +48,7 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
-### 🚀 Module 2: Hosting the Application on EC2 (In Progress)
+### 🚀 Module 2: Hosting the Application on EC2 (Coming Soon)
 
 #### 🔜 Up Next:
 - Getting Started with Amazon EC2
@@ -66,7 +66,7 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
-### 💾 Module 4: Storage
+### 💾 Module 4: Storage (Coming Soon)
 - File Storage (EFS, FSx)
 - Block Storage (EBS, Instance Store)
 - Object Storage (S3)
@@ -75,7 +75,7 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
-### 🗄️ Module 5: Databases
+### 🗄️ Module 5: Databases (Coming Soon)
 - Introduction to AWS Databases
 - Amazon RDS
 - Purpose-Built Databases
@@ -85,7 +85,7 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
-### 📈 Module 6: Monitoring & Optimization
+### 📈 Module 6: Monitoring & Optimization (Coming Soon)
 - Amazon CloudWatch
 - Traffic Routing with Elastic Load Balancing
 - EC2 Auto Scaling

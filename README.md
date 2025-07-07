@@ -172,7 +172,7 @@ python3 application.py
 
 ### 💾 Module 4: Storage – Creating & Connecting Amazon S3
 
-In this module, we provision Amazon S3 to store employee profile photos, set secure access via IAM policies, and update our EC2-hosted application to utilize the bucket.
+This module provisions Amazon S3 to store employee profile photos, set secure access via IAM policies, and update the EC2-hosted application to utilize the bucket.
 
 #### 🪣 S3 Bucket Creation & Object Upload
 - [x] Created S3 bucket: `employee-photo-bucket-sr963`
@@ -216,13 +216,48 @@ In this module, we provision Amazon S3 to store employee profile photos, set sec
 
 ---
 
-### 🗄️ Module 5: Databases (Coming Soon)
-- Introduction to AWS Databases
-- Amazon RDS
-- Purpose-Built Databases
-- Amazon DynamoDB
-- Choosing the Right Database
-- Demonstration: Implementing Amazon DynamoDB
+Here’s your `README.md` section for **🗄️ Module 5: Databases – Implementing Amazon DynamoDB**, written in the same structured, checklist-style format to match your project’s previous modules:
+
+---
+
+### 🗄️ Module 5: Databases – Implementing Amazon DynamoDB
+
+This module connects the Employee Directory app to a backend database using Amazon DynamoDB, enabling persistent data storage and full CRUD capability.
+
+#### 🧪 EC2 Relaunch for Database Integration
+- [x] Cloned most recent S3-enabled EC2 instance:
+  - Used **Launch more like this** on `employee-directory-app-s3`
+  - Renamed to: `employee-directory-app-dynamodb`
+- [x] Verified key settings:
+  - ✅ IAM Role: `EmployeeWebAppRole`
+  - ✅ Auto-assign Public IP: Enabled
+  - ✅ User data script includes correct S3 bucket name
+- [x] Launched instance and waited for **2/2 status checks**
+
+#### 🧭 Amazon DynamoDB Table Setup
+- [x] Navigated to **DynamoDB** console → Clicked **Create Table**
+- [x] Table name: `Employees`
+- [x] Partition key: `id` (String)
+- [x] Used all default settings → Clicked **Create Table**
+
+#### ✅ Application Test: End-to-End Integration
+- [x] Opened new EC2 public IP in browser
+- [x] Verified application was running
+- [x] Added employee entry via UI form:
+  - ✅ Name, Location, Job Title, Badges, and Photo
+  - ✅ Clicked **Save** and confirmed employee added to directory
+
+#### 📂 Verification: Data Stored in S3 and DynamoDB
+- [x] Opened S3 Bucket → Confirmed new object (photo) uploaded
+- [x] Opened DynamoDB Table → Explored items
+  - ✅ Entry with employee info
+  - ✅ Correct `id`, `name`, `badges`, and `objectKey` fields present
+
+#### 🧹 Cleanup
+- [x] Stopped `employee-directory-app-dynamodb` EC2 instance to avoid charges
+- [ ] DynamoDB Table left running (ready for next module)
+
+> 🎉 The app is now fully functional with persistent data stored across Amazon S3 and DynamoDB!
 
 ---
 

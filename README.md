@@ -97,7 +97,7 @@ export PHOTOS_BUCKET=<your-bucket-name>
 export AWS_DEFAULT_REGION=us-west-2
 export DYNAMO_MODE=on
 python3 application.py
-
+```
 > Replace <your-bucket-name> with your actual bucket
 
 #### ✅ Post-Launch

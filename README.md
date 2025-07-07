@@ -27,6 +27,8 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
+### 🚀 Module 1: Hosting the Employee Directory Application on AWS
+
 #### 🔧 IAM Setup
 - [ ] Enable **MFA for the AWS root user**
 - [ ] Create IAM **admin user** (e.g. `AdminUser`)

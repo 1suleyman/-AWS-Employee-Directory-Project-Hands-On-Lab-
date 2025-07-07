@@ -170,10 +170,6 @@ python3 application.py
 
 ---
 
-Here's your `README.md` section for **💾 Module 4: Storage**, written in the same clear, checklist-style format as your previous modules:
-
----
-
 ### 💾 Module 4: Storage – Creating & Connecting Amazon S3
 
 In this module, we provision Amazon S3 to store employee profile photos, set secure access via IAM policies, and update our EC2-hosted application to utilize the bucket.

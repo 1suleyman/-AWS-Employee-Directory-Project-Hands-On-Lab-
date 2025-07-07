@@ -53,7 +53,7 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ---
 
-### 🚀 Module 2: Hosting the Application on EC2 (Coming Soon)
+### 🚀 Module 2: Hosting the Application on EC2
 
 #### 🖥️ EC2 Setup – Launch and Configure the Instance
 

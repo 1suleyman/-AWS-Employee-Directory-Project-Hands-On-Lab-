@@ -170,12 +170,53 @@ python3 application.py
 
 ---
 
-### 💾 Module 4: Storage (Coming Soon)
-- File Storage (EFS, FSx)
-- Block Storage (EBS, Instance Store)
-- Object Storage (S3)
-- Choosing the Right Storage
-- Demonstration: Creating an Amazon S3 Bucket
+Here's your `README.md` section for **💾 Module 4: Storage**, written in the same clear, checklist-style format as your previous modules:
+
+---
+
+### 💾 Module 4: Storage – Creating & Connecting Amazon S3
+
+In this module, we provision Amazon S3 to store employee profile photos, set secure access via IAM policies, and update our EC2-hosted application to utilize the bucket.
+
+#### 🪣 S3 Bucket Creation & Object Upload
+- [x] Created S3 bucket: `employee-photo-bucket-sr963`
+  - Region: `us-west-2` (same as rest of app)
+  - Default settings retained (no public access)
+- [x] Uploaded test image to validate bucket
+  - Used GUI Upload → `employee2.jpg`
+  - Verified success in S3 console
+
+#### 🔐 Bucket Policy Configuration
+- [x] Navigated to **Permissions** tab → Edited **Bucket Policy**
+- [x] Customized IAM policy:
+  - Replaced `INSERT-ACCOUNT-NUMBER` with actual account number
+  - Replaced `INSERT-BUCKET-NAME` with actual bucket name
+  - Removed `<>` brackets
+- [x] Saved policy to allow access from EC2 via IAM Role (`EmployeeWebAppRole`)
+
+#### 🔁 EC2 Relaunch: App Configured to Use S3
+- [x] Cloned existing EC2 instance
+  - Used **Launch more like this** on stopped instance
+  - Renamed to: `employee-directory-app-s3`
+- [x] Verified:
+  - Same AMI and instance type (`t2.micro`)
+  - Auto-assign Public IP → **Enabled**
+  - IAM Role pre-populated: `EmployeeWebAppRole`
+
+#### ⚙️ User Data Configuration
+- [x] Updated EC2 user data with S3 bucket name
+  - Set environment variable: `PHOTOS_BUCKET=employee-photo-bucket-sr963`
+  - Launch script pulls app files from S3 and installs dependencies
+
+#### ✅ Validation
+- [x] Waited for EC2 status checks → **2/2 checks passed**
+- [x] Opened public IP in browser
+  - ✅ Application launched successfully with S3 bucket integration
+  - ❗ Note: Database (DynamoDB) not yet configured for interaction
+
+#### 🧹 Cleanup
+- [x] Stopped demo instance (optional for cost saving)
+- [x] Deleted uploaded S3 object (test image)
 
 ---
 

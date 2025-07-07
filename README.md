@@ -216,10 +216,6 @@ This module provisions Amazon S3 to store employee profile photos, set secure ac
 
 ---
 
-Here’s your `README.md` section for **🗄️ Module 5: Databases – Implementing Amazon DynamoDB**, written in the same structured, checklist-style format to match your project’s previous modules:
-
----
-
 ### 🗄️ Module 5: Databases – Implementing Amazon DynamoDB
 
 This module connects the Employee Directory app to a backend database using Amazon DynamoDB, enabling persistent data storage and full CRUD capability.
@@ -256,8 +252,6 @@ This module connects the Employee Directory app to a backend database using Amaz
 #### 🧹 Cleanup
 - [x] Stopped `employee-directory-app-dynamodb` EC2 instance to avoid charges
 - [ ] DynamoDB Table left running (ready for next module)
-
-> 🎉 The app is now fully functional with persistent data stored across Amazon S3 and DynamoDB!
 
 ---
 

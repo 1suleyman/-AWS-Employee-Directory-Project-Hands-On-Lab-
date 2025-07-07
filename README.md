@@ -55,10 +55,55 @@ Each module focuses on a core AWS concept and includes a step-by-step implementa
 
 ### 🚀 Module 2: Hosting the Application on EC2 (Coming Soon)
 
-#### 🔜 Up Next:
-- Getting Started with Amazon EC2
-- Amazon EC2 Instance Lifecycle
-- Demonstration: Launching the Employee Directory Application on Amazon EC2
+#### 🖥️ EC2 Setup – Launch and Configure the Instance
+
+- [ ] Navigate to EC2 Dashboard → **Launch Instance**
+- [ ] Name instance: `employee-directory-app`
+- [ ] Select AMI: `Amazon Linux 2023`
+- [ ] Instance type: `t2.micro` (Free Tier)
+
+#### 🔐 Key Pair
+- [ ] Select: **Proceed without a key pair**
+  - (Use EC2 browser-based Connect instead of SSH)
+
+#### 🌐 Network Settings
+- [ ] Use **default VPC** and **default subnet**
+- [ ] Auto-assign Public IP: **Enabled**
+
+#### 🔥 Security Group
+- [ ] Remove SSH (port 22)
+- [ ] Allow **HTTP (80)** – for web traffic
+- [ ] Allow **HTTPS (443)** – optional future support
+
+#### 📦 Storage
+- [ ] Leave default root volume
+- [ ] No additional EBS volumes
+
+#### 🪪 IAM Instance Profile
+- [ ] Attach IAM role: `EmployeeWebAppRole`
+  - Grants EC2 instance access to S3 and DynamoDB
+
+#### 📝 User Data (Launch Script)
+```bash
+#!/bin/bash
+cd /home/ec2-user
+wget https://<YOUR_BUCKET>.s3.amazonaws.com/employee-app.zip
+unzip employee-app.zip
+cd employee-app
+yum install python3 -y
+pip3 install -r requirements.txt
+yum install stress -y
+export PHOTOS_BUCKET=<your-bucket-name>
+export AWS_DEFAULT_REGION=us-west-2
+export DYNAMO_MODE=on
+python3 application.py
+
+> Replace <your-bucket-name> with your actual bucket
+
+#### ✅ Post-Launch
+- [ ] Wait for Instance Status Checks to pass
+- [ ] Access the app via the EC2 public IP address
+- [ ] Confirm the Employee Directory loads (empty state)
 
 ---
 

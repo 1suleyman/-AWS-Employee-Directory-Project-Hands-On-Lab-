@@ -134,8 +134,6 @@ python3 application.py
 
 > ✅ Reminder: Subnets are only considered "public" if they are associated with a route table that connects them to an Internet Gateway.
 
----
-
 ### 🔁 Relaunching the Employee Directory App in New VPC
 
 #### 🔄 EC2 Re-deployment Steps

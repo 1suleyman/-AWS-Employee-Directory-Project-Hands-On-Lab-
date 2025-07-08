@@ -39,12 +39,6 @@ If you're building a similar app, studying for AWS certs, or want to understand 
 
 ---
 
-📎 **Want to start from the beginning?**  
-→ Read my [planned module-by-module guide](./planned.md)  
-→ Then follow along below to see it all in action.
-
----
-
 ## 🚀 Module 1: IAM Setup
 
 !-- Fill in details of setting up IAM users, groups, policies, roles, MFA, etc --

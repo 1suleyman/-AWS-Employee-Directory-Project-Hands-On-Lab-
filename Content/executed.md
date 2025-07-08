@@ -43,13 +43,13 @@ If you're building a similar app, studying for AWS certs, or want to understand 
 
 ### 🔧 IAM Setup
 ---
-### [x] Enable **MFA for the AWS root user**
+#### Enable **MFA for the AWS root user**
 ---
 
 ![Screenshot 2025-07-08 at 11 32 58](https://github.com/user-attachments/assets/8bc278e4-5b3f-42da-804b-9aafab5bd768)
 
 ---
-### [x] Create IAM **admin user** (e.g. `AdminUser`)
+#### Create IAM **admin user** (e.g. `AdminUser`)
 ---
 
 **🧠 Question: Should I Give Console Access to My AdminUser?**

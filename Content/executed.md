@@ -290,7 +290,7 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 
 #### 🔐 Key Pair
 ---
-- [ ] Select: **Proceed without a key pair**
+- [x] Select: **Proceed without a key pair**
   - (As I'll be using EC2 browser-based Connect instead of SSH)
 ---
 
@@ -304,7 +304,7 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 ![Screenshot 2025-07-08 at 15 51 38](https://github.com/user-attachments/assets/42a436de-570d-405a-aa3f-a671d2bef328)
 
 ---
-- [ ] Auto-assign Public IP: **Enabled**
+- [x] Auto-assign Public IP: **Enabled**
 ---
 
 ![Screenshot 2025-07-08 at 15 52 05](https://github.com/user-attachments/assets/63543ec9-6f4f-46dd-8720-5b3bc0bc66ea)
@@ -335,7 +335,7 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 
 #### 🪪 IAM Instance Profile
 ---
-- [ ] Attach IAM role: `EmployeeWebAppRole`
+- [x] Attach IAM role: `EmployeeWebAppRole`
   - Grants EC2 instance access to S3 and DynamoDB
 ---
 

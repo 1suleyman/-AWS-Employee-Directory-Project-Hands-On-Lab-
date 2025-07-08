@@ -91,6 +91,39 @@ This gives me the flexibility to:
 
 Later on, I can rotate to programmatic-only access when I start automating or building infrastructure as code.
 
+![Screenshot 2025-07-08 at 12 32 43](https://github.com/user-attachments/assets/7a2c95e8-3b3d-47dd-95e6-e60c3f988b15)
+
+## 🌍 Question: Why Is IAM Identity Center Defaulting to US East (N. Virginia)?
+
+After I selected:
+
+> **"Are you providing console access to a person?"**  
+> and saw the message:  
+> _“We recommend that you use Identity Center to provide console access to a person...”_
+
+I continued to the **IAM Identity Center setup** under **AWS Organizations**, but something confused me:
+
+> **Why is it defaulting to `US East (N. Virginia)` as the current AWS Region, even though I’m based in London?**
+
+### 📌 What I Learned
+
+- **IAM Identity Center (formerly AWS SSO)** is a **global service**, but it needs a **home Region** to store identity-related configurations.
+- As of now, **`us-east-1` (N. Virginia)** is the only supported Region for setting up IAM Identity Center.
+- This Region is **not changeable**, even if your main AWS infrastructure is located in another Region (like `eu-west-2` for London).
+- The Identity Center setup and assignments are global — **but the backend data is stored in N. Virginia**.
+
+### ⚙️ How It Affects This Project
+
+- My **compute, storage, and database resources** are all in the London (`eu-west-2`) Region.
+- IAM Identity Center being locked to `us-east-1` does **not block or conflict** with my project.
+- I can still:
+  - Assign users access to AWS accounts across any Region
+  - Manage permissions for services like EC2, S3, and DynamoDB within my local Region
+
+### ✅ Conclusion
+
+Although it feels unintuitive, this is the current AWS design.  
+I went ahead and used IAM Identity Center in `us-east-1`, knowing it won’t interfere with my London-based infrastructure.
    
 - [ ] Create IAM **group** (e.g. `EC2Admins`)
 - [ ] Attach `AmazonEC2FullAccess` policy to the group

@@ -1,4 +1,4 @@
-# 📂 Executed: My Hands-On AWS Project Walkthrough
+# ✅ Project Execution: AWS 3-Tier Employee Directory Application
 
 Welcome to the hands-on execution log of my **AWS 3-Tier Employee Directory Web Application Project**.  
 This file documents the **exact steps I took** — from IAM setup to Auto Scaling — to bring this application to life on AWS, module by module.

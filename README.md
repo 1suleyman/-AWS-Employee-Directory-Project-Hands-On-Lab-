@@ -36,6 +36,7 @@ AWS-Employee-Directory-Project-Hands-On-Lab/
     ├── planned.md        # Module-by-module breakdowns and setup steps (detailed plans ✅)
     ├── executed.md       # Hands-on execution logs, screenshots, tests, validation steps
 ├── README.md        # You're here!
+```
 
 ## 🧠 What I Learned
 

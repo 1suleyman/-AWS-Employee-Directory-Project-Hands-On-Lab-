@@ -1,4 +1,4 @@
-# 🧑‍💻 AWS 3-Tier Employee Directory Web Application – Hands-On Lab
+# 🧑‍💻 AWS 3-Tier Employee Directory Web Application
 
 Welcome to my personal AWS lab project! This repository documents my step-by-step journey through building a **3-Tier Employee Directory Web Application** on AWS, following cloud best practices.
 

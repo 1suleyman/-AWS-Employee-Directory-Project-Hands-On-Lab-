@@ -22,18 +22,18 @@ This application is built using:
 
 ---
 
-## 📊 Architecture Diagram
-
-![Screenshot 2025-07-04 at 17 11 16](https://github.com/user-attachments/assets/e31de371-4cf1-4980-856a-9eb1243f0d01)
-
----
-
 ## 🗂️ Project Documentation
 
 Quick links to the main learning artifacts in this repo:
 
 - 📘 [Planned Steps](Content/planned.md) – Module-by-module breakdowns, setup plans, and architecture decisions.
 - 🛠️ [Executed Walkthrough](Content/executed.md) – Hands-on implementation logs, screenshots, validations, and testing notes.
+
+---
+
+## 📊 Architecture Diagram
+
+![Screenshot 2025-07-04 at 17 11 16](https://github.com/user-attachments/assets/e31de371-4cf1-4980-856a-9eb1243f0d01)
 
 ---
 

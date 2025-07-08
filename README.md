@@ -4,6 +4,12 @@ Welcome to my personal AWS lab project! This repository documents my step-by-ste
 
 ---
 
+## 📊 Architecture Diagram
+
+![Screenshot 2025-07-04 at 17 11 16](https://github.com/user-attachments/assets/e31de371-4cf1-4980-856a-9eb1243f0d01)
+
+---
+
 ## 📌 Project Overview
 
 The goal of this project is to gain hands-on experience designing and deploying a production-style web application using core AWS services.
@@ -19,12 +25,6 @@ This application is built using:
 - **Elastic Load Balancer** for distributing traffic
 - **EC2 Auto Scaling** for dynamic instance scaling
 - [Future] **API Gateway + Lambda** for a serverless contact form
-
----
-
-## 📊 Architecture Diagram
-
-![Screenshot 2025-07-04 at 17 11 16](https://github.com/user-attachments/assets/e31de371-4cf1-4980-856a-9eb1243f0d01)
 
 ---
 

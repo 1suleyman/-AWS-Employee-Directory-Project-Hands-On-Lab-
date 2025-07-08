@@ -189,12 +189,33 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 ![Screenshot 2025-07-08 at 14 30 28](https://github.com/user-attachments/assets/28d4a7e9-6a68-43bc-81e1-f5e25264660b)
 
 #### 🧭 IAM Roles
-- [ ] Create IAM **role** (`EmployeeWebAppRole`)
-- [ ] Trusted entity type: `EC2`
-- [ ] Attach managed policies:
-  - [ ] `AmazonS3FullAccess`
-  - [ ] `AmazonDynamoDBFullAccess`
+---
+- [x] Create IAM **role** (`EmployeeWebAppRole`)
+---
+
+![Screenshot 2025-07-08 at 14 40 09](https://github.com/user-attachments/assets/63c43585-b0f8-4a84-904e-93b371bcfdfe)
+
+
+---
+- [x] Trusted entity type: `EC2`
+---
+
+![Screenshot 2025-07-08 at 14 37 35](https://github.com/user-attachments/assets/28a31b26-bbf6-4242-be17-f45342c7db53)
+
+---
+- [x] Attach managed policies:
+  - [x] `AmazonS3FullAccess`
+  - [x] `AmazonDynamoDBFullAccess`
+---
+
+![Screenshot 2025-07-08 at 14 38 37](https://github.com/user-attachments/assets/ee1acff5-0d8a-4664-8eb8-5f2eb68464a8)
+
+![Screenshot 2025-07-08 at 14 39 17](https://github.com/user-attachments/assets/5a693511-5815-4f78-b2da-26497fe15665)
+  
 - [ ] Review trust relationship: allow only EC2 to assume role
+
+![Screenshot 2025-07-08 at 14 40 22](https://github.com/user-attachments/assets/a9f85236-caeb-409f-b14b-e67d1c3f98ca)
+
 
 #### 🔑 IAM Users & Access Keys
 - [ ] Create **developer IAM user** (e.g. `DevUser`)

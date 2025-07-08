@@ -37,3 +37,12 @@ AWS-Employee-Directory-Project-Hands-On-Lab/
     ├── executed.md       # Hands-on execution logs, screenshots, tests, validation steps
 ├── README.md        # You're here!
 
+## 🧠 What I Learned
+
+This repo is part of my AWS learning journey as I prepare for real-world cloud infrastructure design and certification. It's more than just a project — it's proof of practice.
+
+## 📮 Feedback
+
+Have ideas, questions, or want to collaborate on cloud projects?
+Feel free to reach out or create an issue in the repo!
+

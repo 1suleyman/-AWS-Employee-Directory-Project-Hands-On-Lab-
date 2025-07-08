@@ -91,15 +91,18 @@ This gives me the flexibility to:
 
 Later on, I can rotate to programmatic-only access when I start automating or building infrastructure as code.
 
-![Screenshot 2025-07-08 at 12 32 43](https://github.com/user-attachments/assets/7a2c95e8-3b3d-47dd-95e6-e60c3f988b15)
+## 🌍 Question: Why Is IAM Identity Center Defaulting to US East (N. Virginia)
 
-## 🌍 Question: Why Is IAM Identity Center Defaulting to US East (N. Virginia)?
+![Screenshot 2025-07-08 at 12 32 43](https://github.com/user-attachments/assets/7a2c95e8-3b3d-47dd-95e6-e60c3f988b15)
 
 After I selected:
 
 > **"Are you providing console access to a person?"**  
 > and saw the message:  
 > _“We recommend that you use Identity Center to provide console access to a person...”_
+
+![Screenshot 2025-07-08 at 12 39 34](https://github.com/user-attachments/assets/cda9637a-3ec0-411f-9ce5-2a5ec6dc8616)
+
 
 I continued to the **IAM Identity Center setup** under **AWS Organizations**, but something confused me:
 

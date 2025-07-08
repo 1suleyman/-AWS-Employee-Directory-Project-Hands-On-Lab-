@@ -51,7 +51,7 @@ Use this file as a **build checklist**. Once you’re ready to see how it played
 - [ ] Enable console access and force password reset
 - [ ] Add user to `EC2Admins` group
 - [ ] Create programmatic access keys for AWS CLI use
-- [ ] ✅ Delete keys after testing (demo only)
+- [ ] ✅ Delete keys after testing 
 
 ---
 

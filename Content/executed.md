@@ -244,11 +244,16 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 ![Screenshot 2025-07-08 at 14 46 57](https://github.com/user-attachments/assets/afcfe4e9-9ae1-403d-9dd9-802c89872691)
 
 ---
-- [ ] Create programmatic access keys for AWS CLI use
+- [x] Create programmatic access keys for AWS CLI use
 ---
 
+![Screenshot 2025-07-08 at 14 50 51](https://github.com/user-attachments/assets/44808af4-b070-4ae7-858b-ef4897f14cf2)
 
-- [ ] ✅ Delete keys after testing 
+---
+- [x] ✅ Delete keys after testing
+---
+
+![Screenshot 2025-07-08 at 14 53 32](https://github.com/user-attachments/assets/1708b704-811f-4d3d-8825-91b17017c795)
 
 ---
 

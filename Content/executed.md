@@ -40,11 +40,11 @@ If you're building a similar app, studying for AWS certs, or want to understand 
 
 ---
 
-## 🚀 Module 1: IAM Setup
+### 🚀 Module 1: IAM Setup
 
 ---
 
-### 🔧 IAM Setup
+#### 🔧 IAM Setup
 
 ---
 - [x] Enable **MFA for the AWS root user**

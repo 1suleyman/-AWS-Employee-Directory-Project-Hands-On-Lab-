@@ -47,40 +47,40 @@ If you're building a similar app, studying for AWS certs, or want to understand 
 
 ## 🚀 Module 1: IAM Setup
 
-<!-- Fill in details of setting up IAM users, groups, policies, roles, MFA, etc -->
+!-- Fill in details of setting up IAM users, groups, policies, roles, MFA, etc --
 🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
 
 ---
 
 ## 🚀 Module 2: Launching the App on EC2
 
-<!-- Fill in EC2 launch steps, user data script, validation steps -->
+!-- Fill in EC2 launch steps, user data script, validation steps --
 🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
 
 ---
 
 ## 🌐 Module 3: VPC Networking + Re-deploy
 
-<!-- Custom VPC, subnets, IGW, route tables, and app redeployment -->
+!-- Custom VPC, subnets, IGW, route tables, and app redeployment --
 🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
 
 ---
 
 ## 💾 Module 4: Storage (S3 Integration)
 
-<!-- S3 bucket creation, bucket policy, EC2 app update, test upload -->
+!-- S3 bucket creation, bucket policy, EC2 app update, test upload --
 🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
 
 ---
 
 ## 🗄️ Module 5: Database (DynamoDB Integration)
 
-<!-- DynamoDB table creation, full CRUD test via app -->
+!-- DynamoDB table creation, full CRUD test via app --
 🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
 
 ---
 
 ## 📈 Module 6: Monitoring & Auto Scaling
 
-<!-- Load balancer setup, ASG, launch template, stress test, scale-out -->
+!-- Load balancer setup, ASG, launch template, stress test, scale-out --
 🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!

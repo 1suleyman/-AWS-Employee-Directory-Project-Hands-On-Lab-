@@ -40,11 +40,11 @@ If you're building a similar app, studying for AWS certs, or want to understand 
 
 ---
 
-### 🚀 Module 1: IAM Setup
+## 🚀 Module 1: IAM Setup
 
 ---
 
-#### 🔧 IAM Setup
+### 🔧 IAM Setup
 
 ---
 - [x] Enable **MFA for the AWS root user**
@@ -191,7 +191,7 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 
 ![Screenshot 2025-07-08 at 14 30 28](https://github.com/user-attachments/assets/28d4a7e9-6a68-43bc-81e1-f5e25264660b)
 
-#### 🧭 IAM Roles
+### 🧭 IAM Roles
 ---
 - [x] Create IAM **role** (`EmployeeWebAppRole`)
 ---
@@ -222,7 +222,7 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 ![Screenshot 2025-07-08 at 14 40 22](https://github.com/user-attachments/assets/a9f85236-caeb-409f-b14b-e67d1c3f98ca)
 
 
-#### 🔑 IAM Users & Access Keys
+### 🔑 IAM Users & Access Keys
 ---
 - [ ] Create **developer IAM user** (e.g. `DevUser`)
 ---

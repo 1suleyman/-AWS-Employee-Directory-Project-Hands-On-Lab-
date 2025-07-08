@@ -1,6 +1,31 @@
-## ✅ Module Checklist
+# ✅ Project Plan: AWS 3-Tier Employee Directory Application
 
-> Each module focuses on a core AWS concept and includes a step-by-step implementation guide I can follow when building the project independently.
+This file outlines the **step-by-step implementation plan** I followed to build a production-style 3-Tier web application on AWS.
+
+Each module in this guide focuses on a **core AWS concept** — including IAM, EC2, S3, VPC networking, DynamoDB, load balancing, and auto scaling — with clear instructions for how to set up each part independently.
+
+📌 **Purpose:**  
+To design, plan, and practice building cloud-native infrastructure from scratch — the *right* way — using AWS best practices.
+
+📄 **Want to see it in action?**  
+→ [Check out the executed steps with screenshots, configs, and validations »](./executed.md)
+
+---
+
+## 🗂️ Module Overview
+
+The project is divided into 6 guided modules:
+
+1. **IAM** — Set up secure access using users, groups, roles, and MFA  
+2. **EC2** — Launch the application on a virtual server  
+3. **VPC** — Design custom networking with public/private subnets  
+4. **S3** — Store employee profile images with restricted access  
+5. **DynamoDB** — Persist employee data using a NoSQL database  
+6. **Monitoring & Scaling** — Add load balancing and auto scaling for high availability
+
+---
+
+Use this file as a **build checklist**. Once you’re ready to see how it played out in real life, jump over to [executed.md](./executed.md).
 
 ---
 

@@ -265,49 +265,72 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 #### 🖥️ EC2 Setup – Launch and Configure the Instance
 
 ---
-- [ ] Navigate to EC2 Dashboard → **Launch Instance**
+- [x] Navigate to EC2 Dashboard → **Launch Instance**
 ---
+
+![Screenshot 2025-07-08 at 15 48 13](https://github.com/user-attachments/assets/6e8ac15f-18aa-4496-8051-1feab401649b)
+
 ---
-- [ ] Name instance: `employee-directory-app`
+- [x] Name instance: `employee-directory-app`
 ---
+
+![Screenshot 2025-07-08 at 15 48 47](https://github.com/user-attachments/assets/15626678-1227-4446-a2e6-8609687cd5a1)
+
 ---
-- [ ] Select AMI: `Amazon Linux 2023`
+- [x] Select AMI: `Amazon Linux 2023`
 ---
+
+![Screenshot 2025-07-08 at 15 49 23](https://github.com/user-attachments/assets/aa0cd5e1-923e-4e37-9514-7bea38466798)
+
 ---
-- [ ] Instance type: `t2.micro` (Free Tier)
+- [x] Instance type: `t2.micro` (Free Tier)
 ---
+
+![Screenshot 2025-07-08 at 15 50 02](https://github.com/user-attachments/assets/52124ee1-64c7-48a4-9da9-803a15607295)
 
 #### 🔐 Key Pair
 ---
 - [ ] Select: **Proceed without a key pair**
-  - (Use EC2 browser-based Connect instead of SSH)
+  - (As I'll be using EC2 browser-based Connect instead of SSH)
 ---
+
+![Screenshot 2025-07-08 at 15 50 24](https://github.com/user-attachments/assets/a05c7ca9-89e4-40c7-8370-400027ebe2b8)
 
 #### 🌐 Network Settings
 ---
-- [ ] Use **default VPC** and **default subnet**
+- [x] Use **default VPC** and **default subnet**
 ---
+
+![Screenshot 2025-07-08 at 15 51 38](https://github.com/user-attachments/assets/42a436de-570d-405a-aa3f-a671d2bef328)
+
 ---
 - [ ] Auto-assign Public IP: **Enabled**
 ---
 
+![Screenshot 2025-07-08 at 15 52 05](https://github.com/user-attachments/assets/63543ec9-6f4f-46dd-8720-5b3bc0bc66ea)
+
 #### 🔥 Security Group
 ---
-- [ ] Remove SSH (port 22)
+- [x] Remove SSH (port 22)
 ---
 ---
-- [ ] Allow **HTTP (80)** – for web traffic
+- [x] Allow **HTTP (80)** – for web traffic
 ---
+
+![Screenshot 2025-07-08 at 15 53 49](https://github.com/user-attachments/assets/780cdc39-e955-42b2-87c6-555514d63301)
+
 ---
-- [ ] Allow **HTTPS (443)** – optional future support
+- [x] Allow **HTTPS (443)** – optional future support
 ---
+
+![Screenshot 2025-07-08 at 15 54 03](https://github.com/user-attachments/assets/8fad4e78-5525-490f-a413-a9943421402a)
 
 #### 📦 Storage
 ---
-- [ ] Leave default root volume
+- [x] Leave default root volume
 ---
 ---
-- [ ] No additional EBS volumes
+- [x] No additional EBS volumes
 ---
 
 #### 🪪 IAM Instance Profile
@@ -315,6 +338,8 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 - [ ] Attach IAM role: `EmployeeWebAppRole`
   - Grants EC2 instance access to S3 and DynamoDB
 ---
+
+![Screenshot 2025-07-08 at 15 54 56](https://github.com/user-attachments/assets/d5583f68-77ff-43d5-b888-5436dc6896e7)
 
 #### 📝 User Data (Launch Script)
 ```bash
@@ -335,14 +360,88 @@ python3 application.py
 
 #### ✅ Post-Launch
 ---
-- [ ] Wait for Instance Status Checks to pass
+- [x] Wait for Instance Status Checks to pass
 ---
+
+![Screenshot 2025-07-08 at 16 04 13](https://github.com/user-attachments/assets/f099ae1c-a31e-44bf-b999-15130b71aaec)
+
 ---
-- [ ] Access the app via the EC2 public IP address
+- [x] Access the app via the EC2 public IP address
 ---
+
+### 🧭 What Just Happened (My Summary)
+
+After launching my EC2 instance, I tried accessing the app using the public IP address — but I hit this error:
+
+❌ This site can’t be reached
+13.41.53.236 refused to connect
+ERR_CONNECTION_REFUSED
+
+That told me the app wasn’t running — most likely because the User Data launch script failed.
+
+I checked /var/log/cloud-init-output.log and realized I never replaced this line in the script:
+
+```bash
+wget https://<YOUR_BUCKET>.s3.amazonaws.com/employee-app.zip
+```
+
+Because <YOUR_BUCKET> wasn’t updated with a real S3 bucket name, the EC2 instance failed to:
+
+- Download the zip file
+- Unzip the app
+- Install the dependencies
+- Start the Flask server
+
+Basically, the app never launched — so there was nothing for the public IP to respond with.
+
+**🔄 My Pivot: Serve a Static Website Instead**
+Instead of chasing down a public bucket or recreating the Flask app zip file, I asked:
+
+< “Can I just serve a basic HTML page from this EC2 instance instead?”
+
+Turns out — **yes**. So I pivoted to testing my infrastructure setup by serving a static HTML page via Apache (httpd).
+
+**✅ Working User Data Script (Static Site)**
+```bash
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+
+# Create a simple HTML page
+cat <<EOF > /var/www/html/index.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First EC2 Website</title>
+</head>
+<body>
+  <h1>🎉 Hello from EC2!</h1>
+  <p>This static website was launched with a User Data script.</p>
+</body>
+</html>
+EOF
+```
+
+**✅ EC2 Static Website Launched Successfully**
+
+After correcting my User Data script and launching a fresh instance (`employee-directory-app-2`), I was able to:
+
+- After launching a new instance (employee-directory-app-2) with the updated User Data, I was able to:
+- Confirm httpd was installed and running: systemctl status httpd
+- See that /var/www/html/index.html was created correctly
+- Run curl http://localhost and curl http://<Public IP> — both returned the HTML
+- Open the site in an Incognito browser window (fixed caching issues from earlier attempts)
+- See the site load with a "Not Secure" message (expected with HTTP on port 80
+
+🎉 The EC2 instance now serves my static website from user data!
+
 ---
-- [ ] Confirm the Employee Directory loads (empty state)
+- [x] Confirm the Employee Directory loads (empty state)
 ---
+
+![Screenshot 2025-07-08 at 16 57 42](https://github.com/user-attachments/assets/d88192c7-8134-4226-bd85-9b557a60d86a)
 
 ---
 

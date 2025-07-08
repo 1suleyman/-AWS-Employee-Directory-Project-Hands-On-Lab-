@@ -48,9 +48,9 @@ If you're building a similar app, studying for AWS certs, or want to understand 
    
 - [x] Create IAM **admin user** (e.g. `AdminUser`)
 
-![Screenshot 2025-07-08 at 12 13 16](https://github.com/user-attachments/assets/66d576de-97b5-4cb8-8edf-4ddc336f17ac)
-
 ## 🧠 Question: Should I Give Console Access to My AdminUser?
+
+![Screenshot 2025-07-08 at 12 13 16](https://github.com/user-attachments/assets/66d576de-97b5-4cb8-8edf-4ddc336f17ac)
 
 Once I got to this stage — creating my IAM admin user — I paused to ask myself:
 

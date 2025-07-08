@@ -255,10 +255,69 @@ This module connects the Employee Directory app to a backend database using Amaz
 
 ---
 
-### 📈 Module 6: Monitoring & Optimization (Coming Soon)
-- Amazon CloudWatch
-- Traffic Routing with Elastic Load Balancing
-- EC2 Auto Scaling
-- Solution Optimization
-- Demonstration: Making the App Highly Available
-- Redesigning the Application Architecture
+### 📈 Module 6: Monitoring & Optimization – Load Balancing & Auto Scaling
+
+In this last module, the Employee Directory application is scaled for high availability and fault tolerance using an Application Load Balancer and EC2 Auto Scaling Group.
+
+#### 🚀 EC2 Relaunch for Load Balancing Setup
+- [x] Cloned latest app instance: `employee-directory-app-dynamodb`
+- [x] Renamed new instance: `employee-directory-app-lb`
+- [x] Verified:
+  - ✅ Public IP: Enabled
+  - ✅ IAM Role: `EmployeeWebAppRole`
+  - ✅ User data: Correct S3 bucket + region
+- [x] Launched instance & confirmed 2/2 health checks
+- [x] Tested app endpoint manually to confirm it's functional
+
+#### 🌐 Application Load Balancer Setup
+- [x] Navigated to EC2 → Load Balancers → **Create Application Load Balancer**
+- [x] Name: `app-elb`
+- [x] Configuration:
+  - ✅ Internet-facing
+  - ✅ VPC: `app-vpc`
+  - ✅ Availability Zones: `us-west-2a`, `us-west-2b`
+- [x] Created Security Group: `load-balancer-sg`
+  - ✅ Inbound: Allow HTTP (port 80) from anywhere
+- [x] Listener:
+  - ✅ Target group type: **Instance**
+  - ✅ Target group name: `app-target-group`
+  - ✅ Health checks configured:
+    - Protocol: HTTP
+    - Path: `/`
+    - Thresholds: Healthy = 2, Unhealthy = 5
+    - Timeout: 30s, Interval: 40s
+- [x] Registered target: `employee-directory-app-lb` instance
+- [x] Load balancer became **Active**
+- [x] Copied DNS endpoint → Confirmed application accessible via ALB
+
+#### 📄 Launch Template for Auto Scaling
+- [x] Created Launch Template: `app-launch-template`
+  - ✅ Instance type: `t2.micro` (Free Tier)
+  - ✅ Network: `app-vpc` + Web SG
+  - ✅ IAM Role: `EmployeeWebAppRole`
+  - ✅ User data: Updated with correct bucket & region
+- [x] Verified: Launch template ready for Auto Scaling group
+
+#### 📈 Auto Scaling Group (ASG) Setup
+- [x] Created ASG: `app-asg` using launch template
+- [x] Configured:
+  - ✅ VPC: `app-vpc`
+  - ✅ Subnets: `Public Subnet 1` + `Public Subnet 2`
+  - ✅ Load Balancer Target Group: `app-target-group`
+  - ✅ Health Check Type: ELB
+- [x] Set group size:
+  - ✅ Desired: 2
+  - ✅ Min: 2
+  - ✅ Max: 4
+- [x] Target tracking scaling policy:
+  - ✅ Metric: Avg CPU utilization
+  - ✅ Threshold: 60%
+  - ✅ Warm-up: 300s
+
+#### 🔁 Testing Auto Scaling
+- [x] Appended `/info` to ALB DNS to verify instance routing
+- [x] Used `/stress-cpu?duration=10m` to simulate load
+- [x] Monitored Target Group health
+- [x] ✅ Observed Auto Scaling: 2 new EC2 instances launched
+
+> 🎯 Outcome: Application is now highly available and scalable with built-in fault tolerance and load distribution across multiple Availability Zones.

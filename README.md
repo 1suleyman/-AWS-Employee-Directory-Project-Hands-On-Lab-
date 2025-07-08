@@ -33,7 +33,8 @@ Quick links to the main learning artifacts in this repo:
 
 ## 📊 Architecture Diagram
 
-![Screenshot 2025-07-04 at 17 11 16](https://github.com/user-attachments/assets/e31de371-4cf1-4980-856a-9eb1243f0d01)
+![Screenshot 2025-07-08 at 10 41 47](https://github.com/user-attachments/assets/0e6db769-0053-41a3-a6cf-d135515adbff)
+
 
 ---
 

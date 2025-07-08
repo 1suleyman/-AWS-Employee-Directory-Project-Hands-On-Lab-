@@ -1,4 +1,4 @@
-# ✅ Project Plan: AWS 3-Tier Employee Directory Application
+# Project Plan: AWS 3-Tier Employee Directory Application
 
 This file outlines the **step-by-step implementation plan** I followed to build a production-style 3-Tier web application on AWS.
 

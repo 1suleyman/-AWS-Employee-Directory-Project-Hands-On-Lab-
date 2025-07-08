@@ -45,10 +45,13 @@ If you're building a similar app, studying for AWS certs, or want to understand 
 ---
 - [x] Enable **MFA for the AWS root user**
 ---
+
 ![Screenshot 2025-07-08 at 11 32 58](https://github.com/user-attachments/assets/8bc278e4-5b3f-42da-804b-9aafab5bd768)
+
 ---
 - [x] Create IAM **admin user** (e.g. `AdminUser`)
 ---
+
 ## 🧠 Question: Should I Give Console Access to My AdminUser?
 
 ![Screenshot 2025-07-08 at 12 13 16](https://github.com/user-attachments/assets/66d576de-97b5-4cb8-8edf-4ddc336f17ac)
@@ -166,16 +169,22 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 - I made sure the password was strong enough to meet AWS requirements
 
 > Later, when the lab is complete, I can always reset the password or rotate credentials
-   
+
+---
 - [x] Create IAM **group** (e.g. `EC2Admins`)
+---
 
 ![Screenshot 2025-07-08 at 14 28 50](https://github.com/user-attachments/assets/aa9762a6-2243-4cb9-8c46-b2a2923dca70)
 
+---
 - [x] Attach `AmazonEC2FullAccess` policy to the group
+---
 
 ![Screenshot 2025-07-08 at 14 29 41](https://github.com/user-attachments/assets/36f1bb54-c0c7-405e-8bb5-b7feced2cd62)
 
-- [ ] Add `AdminUser` to the group
+---
+- [x] Add `AdminUser` to the group
+---
 
 ![Screenshot 2025-07-08 at 14 30 28](https://github.com/user-attachments/assets/28d4a7e9-6a68-43bc-81e1-f5e25264660b)
 

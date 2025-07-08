@@ -32,7 +32,8 @@ This application is built using:
 
 ```bash
 AWS-Employee-Directory-Project-Hands-On-Lab/
-├── planned/                # Module-by-module breakdowns and setup steps (detailed plans ✅)
-├── executed/               # Hands-on execution logs, screenshots, tests, validation steps
-├── README.md               # You're here!
+├── Content
+    ├── planned.md        # Module-by-module breakdowns and setup steps (detailed plans ✅)
+    ├── executed.md       # Hands-on execution logs, screenshots, tests, validation steps
+├── README.md        # You're here!
 

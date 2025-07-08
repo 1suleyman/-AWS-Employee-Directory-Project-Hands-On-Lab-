@@ -211,8 +211,10 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 ![Screenshot 2025-07-08 at 14 38 37](https://github.com/user-attachments/assets/ee1acff5-0d8a-4664-8eb8-5f2eb68464a8)
 
 ![Screenshot 2025-07-08 at 14 39 17](https://github.com/user-attachments/assets/5a693511-5815-4f78-b2da-26497fe15665)
-  
+
+---
 - [x] Review trust relationship: allow only EC2 to assume role
+---
 
 ![Screenshot 2025-07-08 at 14 40 22](https://github.com/user-attachments/assets/a9f85236-caeb-409f-b14b-e67d1c3f98ca)
 

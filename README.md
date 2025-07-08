@@ -1,6 +1,6 @@
 # -AWS-Employee-Directory-Project-Hands-On-Lab-
 
-Welcome! This repository documents my hands-on journey through building a **serverless employee directory web application** on AWS. The goal is to apply cloud infrastructure skills by building a real project step-by-step, aligned with AWS best practices.
+Welcome! This repository documents my hands-on journey through building a **3-Tier employee directory web application** on AWS. The goal is to apply cloud infrastructure skills by building a real project step-by-step, aligned with AWS best practices.
 
 ![Screenshot 2025-07-04 at 17 11 16](https://github.com/user-attachments/assets/e31de371-4cf1-4980-856a-9eb1243f0d01)
 

@@ -212,16 +212,42 @@ Since I’m doing **solo hands-on work** and managing everything myself:
 
 ![Screenshot 2025-07-08 at 14 39 17](https://github.com/user-attachments/assets/5a693511-5815-4f78-b2da-26497fe15665)
   
-- [ ] Review trust relationship: allow only EC2 to assume role
+- [x] Review trust relationship: allow only EC2 to assume role
 
 ![Screenshot 2025-07-08 at 14 40 22](https://github.com/user-attachments/assets/a9f85236-caeb-409f-b14b-e67d1c3f98ca)
 
 
 #### 🔑 IAM Users & Access Keys
+---
 - [ ] Create **developer IAM user** (e.g. `DevUser`)
-- [ ] Enable console access and force password reset
-- [ ] Add user to `EC2Admins` group
+---
+
+![Screenshot 2025-07-08 at 14 43 41](https://github.com/user-attachments/assets/0b39df9a-f37e-4e10-b95e-7511b131f81f)
+
+---
+- [x] Enable console access and force password reset
+---
+![Screenshot 2025-07-08 at 14 45 03](https://github.com/user-attachments/assets/0faf2d76-0998-4614-ab71-bd5d37e60cb4)
+
+![Screenshot 2025-07-08 at 14 46 12](https://github.com/user-attachments/assets/574d7119-97d5-41ec-a161-02c37bf9cf01)
+
+Since I’m doing **solo hands-on work** and managing everything myself:
+
+- I used a **custom password** that I could remember quickly
+- I **unchecked** the “must reset password on next sign-in” box to avoid extra steps
+- I made sure the password was strong enough to meet AWS requirements
+
+---
+- [x] Add user to `EC2Admins` group
+---
+
+![Screenshot 2025-07-08 at 14 46 57](https://github.com/user-attachments/assets/afcfe4e9-9ae1-403d-9dd9-802c89872691)
+
+---
 - [ ] Create programmatic access keys for AWS CLI use
+---
+
+
 - [ ] ✅ Delete keys after testing 
 
 ---

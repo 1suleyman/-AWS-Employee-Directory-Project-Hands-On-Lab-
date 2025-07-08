@@ -28,19 +28,19 @@ This application is built using:
 
 ---
 
-## 📁 Repository Structure
+## 🗂️ Project Documentation
 
-```bash
-AWS-Employee-Directory-Project-Hands-On-Lab/
-├── Content
-    ├── planned.md        # Module-by-module breakdowns and setup steps (detailed plans ✅)
-    ├── executed.md       # Hands-on execution logs, screenshots, tests, validation steps
-├── README.md        # You're here!
-```
+Quick links to the main learning artifacts in this repo:
+
+- 📘 [Planned Steps](Content/planned.md) – Module-by-module breakdowns, setup plans, and architecture decisions.
+- 🛠️ [Executed Walkthrough](Content/executed.md) – Hands-on implementation logs, screenshots, validations, and testing notes.
+
+---
 
 ## 🧠 What I Learned
 
-This repo is part of my AWS learning journey as I prepare for real-world cloud infrastructure design and certification. It's more than just a project — it's proof of practice.
+This repo is part of my AWS learning journey as I prepare for real-world cloud infrastructure design and certification.  
+It’s more than just a project — it’s **proof of practice**.
 
 ## 📮 Feedback
 

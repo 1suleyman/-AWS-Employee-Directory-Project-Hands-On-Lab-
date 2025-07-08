@@ -160,7 +160,7 @@ There’s also a checkbox:
 - You're doing **short-term lab work** and don’t want to reset a password immediately
 - You want to **avoid the "reset password on first login" step**
 
-### 💡 What I Chose (for This Project)
+#### ✅ My Choice
 
 Since I’m doing **solo hands-on work** and managing everything myself:
 

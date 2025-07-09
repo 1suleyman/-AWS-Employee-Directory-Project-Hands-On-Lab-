@@ -464,7 +464,7 @@ After correcting my User Data script and launching a fresh instance (`employee-d
   - `Private Subnet 2` → `10.1.4.0/24` (AZ: `e.g. eu-west-2b`)
 ---
 
-![Screenshot 2025-07-09 at 09 58 45](https://github.com/user-attachments/assets/6964b196-7d4e-4553-9513-09fe3839739d)
+![Screenshot 2025-07-09 at 10 16 06](https://github.com/user-attachments/assets/00960008-5912-49a1-ad9b-ed2511b534db)
 
 ![Screenshot 2025-07-09 at 10 00 05](https://github.com/user-attachments/assets/4a57be65-a6c6-420d-a62a-ee1d96417339)
 

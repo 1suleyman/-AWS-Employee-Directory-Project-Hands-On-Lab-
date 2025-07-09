@@ -573,24 +573,18 @@ Unless I explicitly make that file public, the download will silently fail durin
 ![Screenshot 2025-07-09 at 12 21 40](https://github.com/user-attachments/assets/0d1fba15-81ec-4b6e-9d78-51632a043f9f)
 
 ---
-- [ ] Click Upload → Add files
+- [x] Click Upload → Add files
   - Upload your employee-app.zip file
-  - Opened the Object actions dropdown
-  - Chose **"Make public"** to allow access only to that specific file
-
-**🔓 Making My employee-app.zip Public in S3 (So EC2 Can Download It)**
-
-When I uploaded my employee-app.zip file to S3, I wanted to make it publicly accessible so that my EC2 instance could download it using wget in the User Data script.
-
-![Screenshot 2025-07-09 at 12 27 42](https://github.com/user-attachments/assets/f0e4067b-5518-442d-8a0e-e299892cf8e1)
-
-At first, I tried to use the **“Make public using ACL”** option — but it was greyed out. That’s when I realized the bucket was created with Block all public access enabled by default, which also disables public ACLs.
+  - Opened the Object actions dropdown ❌ (I had to find another solution, which you will see!)
+  - Chose **"Make public"** to allow access only to that specific file ❌ (I had to find another solution, which you will see!)
 
 **🛠️ Making employee-app.zip Public (Using a Bucket Policy Instead of ACL)**
 
 After uploading my employee-app.zip file to S3, I needed to make it publicly accessible so my EC2 instance could download it as part of the **User Data script**.
 
 At first, I tried to use the **“Make public using ACL”** option on the file — but it was greyed out.
+
+![Screenshot 2025-07-09 at 12 27 42](https://github.com/user-attachments/assets/f0e4067b-5518-442d-8a0e-e299892cf8e1)
 
 So here’s what I did instead:
 

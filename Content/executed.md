@@ -448,26 +448,56 @@ After correcting my User Data script and launching a fresh instance (`employee-d
 ## 🌐 Module 3: VPC Networking + Re-deploy
 
 #### 🛠️ VPC Setup
+---
 - [x] Created custom VPC: `app-vpc`
   - CIDR block: `10.1.0.0/16`
+---
+
+![Screenshot 2025-07-09 at 09 57 07](https://github.com/user-attachments/assets/2cd9fb4e-dd8b-4b77-8bdf-cc376432b054)
 
 #### 🧱 Subnet Configuration
+---
 - [x] Created four subnets with non-overlapping ranges:
-  - `Public Subnet 1` → `10.1.1.0/24` (AZ: `e.g. us-west-2a`)
-  - `Private Subnet 1` → `10.1.2.0/24` (AZ: `e.g. us-west-2a`)
-  - `Public Subnet 2` → `10.1.3.0/24` (AZ: `e.g. us-west-2b`)
-  - `Private Subnet 2` → `10.1.4.0/24` (AZ: `e.g. us-west-2b`)
+  - `Public Subnet 1` → `10.1.1.0/24` (AZ: `e.g. eu-west-2a`)
+  - `Private Subnet 1` → `10.1.2.0/24` (AZ: `e.g. eu-west-2a`)
+  - `Public Subnet 2` → `10.1.3.0/24` (AZ: `e.g. eu-west-2b`)
+  - `Private Subnet 2` → `10.1.4.0/24` (AZ: `e.g. eu-west-2b`)
+---
+
+![Screenshot 2025-07-09 at 09 58 45](https://github.com/user-attachments/assets/6964b196-7d4e-4553-9513-09fe3839739d)
+
+![Screenshot 2025-07-09 at 10 00 05](https://github.com/user-attachments/assets/4a57be65-a6c6-420d-a62a-ee1d96417339)
+
+![Screenshot 2025-07-09 at 10 00 20](https://github.com/user-attachments/assets/db6a464c-d36a-40ea-9bb1-972cd3f7c636)
+
+![Screenshot 2025-07-09 at 10 00 44](https://github.com/user-attachments/assets/df10dc5c-5a59-403b-8934-df47c0c74a23)
+
+
 
 #### 🌐 Internet Gateway
+---
 - [x] Created and attached Internet Gateway: `app-igw`
   - Attached to `app-vpc`
+---
+
+![Screenshot 2025-07-09 at 10 05 17](https://github.com/user-attachments/assets/3619ae1e-df25-40e7-97b8-829b9615b918)
+
+![Screenshot 2025-07-09 at 10 06 06](https://github.com/user-attachments/assets/d999f0e2-2ef5-4182-9bfd-312bfea20e38)
 
 #### 🧭 Public Route Table
+---
 - [x] Created route table: `public-route-table`
   - Destination: `0.0.0.0/0` → Target: Internet Gateway
   - Associated with:
     - `Public Subnet 1`
     - `Public Subnet 2`
+---
+
+![Screenshot 2025-07-09 at 10 09 11](https://github.com/user-attachments/assets/c146de50-a7ca-4359-894f-f4fdb0508416)
+
+![Screenshot 2025-07-09 at 10 10 09](https://github.com/user-attachments/assets/169501f5-d760-4028-ae00-ae8991245132)
+
+![Screenshot 2025-07-09 at 10 10 55](https://github.com/user-attachments/assets/291a3310-35f9-435d-9c72-ace37bd87c64)
 
 > ✅ Reminder: Subnets are only considered "public" if they are associated with a route table that connects them to an Internet Gateway.
 

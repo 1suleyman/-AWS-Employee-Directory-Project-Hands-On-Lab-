@@ -553,7 +553,7 @@ This creates a employee-app.zip file with all the necessary code and folders ins
 **🔐 Making My S3 Zip File Public for EC2 User Data**
 When I got to this stage, I asked myself:
 
-< “Do I need to disable Block Public Access in my S3 bucket to let EC2 download my employee-app.zip file using wget?”
+> “Do I need to disable Block Public Access in my S3 bucket to let EC2 download my employee-app.zip file using wget?”
 
 After a bit of digging, here’s what I learned 👇
 
@@ -598,7 +598,7 @@ So here’s what I did instead:
 Block public and cross-account access to buckets and objects through any public bucket or access point policies
 ```
 
-< This setting was preventing even valid bucket policies from allowing public access.
+> This setting was preventing even valid bucket policies from allowing public access.
 
 4. Then I scrolled to the **Bucket Policy** section and added the following:
 
@@ -623,11 +623,7 @@ Block public and cross-account access to buckets and objects through any public 
 This confirms that the file is now publicly accessible **(only that one file)** — and I’m ready to use this link inside my EC2 User Data script.
 
 ---
-
-![Screenshot 2025-07-09 at 12 22 35](https://github.com/user-attachments/assets/58d04fec-fe8e-47e8-81f3-0daeb2a1c2c3)
-
----
-- [ ] After upload completes:
+- [x] After upload completes:
   - Click on the file
   - Under Object URL, copy the link — for example:
 ---
@@ -648,7 +644,7 @@ Update the launch script to pull your real .zip file from S3:
 ```bash
 #!/bin/bash
 cd /home/ec2-user
-wget https://employee-photo-bucket-sr963.s3.amazonaws.com/employee-app.zip
+wget https://employee-flask-app.s3.eu-west-2.amazonaws.com/employee-app.zip
 unzip employee-app.zip
 cd employee-app
 yum install python3 -y
@@ -660,47 +656,79 @@ export DYNAMO_MODE=on
 python3 application.py
 ```
 
-✅ Replace the bucket name and S3 URL with your own.
-
 **🚀 Step 5: Relaunch EC2 with Updated Script**
 
 In the AWS EC2 Console:
 
-1. Go to Instances → Select a previous instance → Click Launch more like this
-2. Rename it: employee-directory-app-flask
+1. Go to Instances → click new instance
+2. Rename it: employee-directory-app-networking-module
 3. Choose:
+  - Instance type: `t2.micro`
+  - Proceed without key pair
   - VPC: app-vpc
-  - Subnet: Public Subnet 1 or 2
+  - Subnet: Public Subnet 1
   - Auto-assign Public IP: ✅ Enabled
 4. Paste your updated User Data into the Advanced Details section
-- [x] Created new security group for `app-vpc`
+- [x] Created new security group for `app-sg`
   - Inbound rules:
     - HTTP (port 80) from anywhere
     - HTTPS (port 443) from anywhere
+    - ssh (port 22) from anywhere
+  5. Attach IAM role: EmployeeWebAppRole
+    - Grants EC2 instance access to S3 and DynamoDB
 
-**✅ Step 6: Validate Everything Works**
+**😮‍💨 Step 6: When the Flask App Still Didn’t Work…**
 
-- [x] After instance launch and health checks:
-- [x] Visit http://<EC2 Public IP> in browser
-- [x] Confirm Flask app loads correctly
+After following all the steps — zipping up my Flask app, making the S3 object public, launching the EC2 instance with the correct IAM role and security group — I was so sure it would finally work.
 
+But…
 
-### 🔁 Relaunching the Employee Directory App in New VPC
+```
+❌ This site can’t be reached  
+18.133.156.203 refused to connect.  
+ERR_CONNECTION_REFUSED
+```
 
-#### 🔄 EC2 Re-deployment Steps
-- [x] Navigated to EC2 → Selected existing instance → Actions → **Launch more like this**
-- [x] Updated name: `Employee Directory App 2`
-- [x] Selected:
-  - AMI: Amazon Linux 2
-  - Instance type: `t2.micro`
-  - Proceed without key pair
-- [x] Selected **new VPC**: `app-vpc`
-- [x] Subnet: `Public Subnet 1`
-- [x] Enabled Auto-assign Public IP
+At this point, I genuinely wanted to shed a tear.
 
-#### 🔐 IAM Role
-- [x] Verified IAM role `EmployeeWebAppRole` was prepopulated in launch wizard
+I had been battling Gemini’s AI-generated Flask code for nearly **2 hours** — tweaking the structure, rewriting the application.py, rebuilding the zip, fixing the User Data script, redeploying, and still... nothing.
 
+**🧠 Lesson: Sometimes Google > AI**
+
+In a last-ditch effort, I Googled:
+
+> “AWS Technical Essentials Flask code”
+
+And boom 💥 — I found a course article that included **the exact User Data script** used in the original training materials.
+
+**✅ The Working User Data Script (Finally!)**
+
+```bash
+#!/bin/bash -ex 
+wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/DEV-AWS-MO-GCNv2/FlaskApp.zip 
+unzip FlaskApp.zip 
+cd FlaskApp/ 
+yum -y install python3 
+yum -y install python3-pip 
+pip install -r requirements.txt 
+yum -y install stress 
+export PHOTOS_BUCKET=employee-flask-app
+export AWS_DEFAULT_REGION=eu-west-2
+export DYNAMO_MODE=on 
+FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
+```
+
+**🎉 And It Worked!**
+
+I updated the User Data with this version, launched a new EC2 instance, and visited the public IP:
+
+> ✅ The Flask Employee Directory loaded perfectly in my browser!
+
+![Screenshot 2025-07-09 at 16 22 12](https://github.com/user-attachments/assets/c83440b5-333b-45a6-b471-a18d17ed1fb4)
+
+**📌 Key Takeaway**
+
+Sometimes, instead of debugging generated code for hours, a simple Google search can save the day — just like the good ol’ StackOverflow era.
 
 ---
 

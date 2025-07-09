@@ -588,9 +588,7 @@ At first, I tried to use the **“Make public using ACL”** option — but it w
 
 **🛠️ Making employee-app.zip Public (Using a Bucket Policy Instead of ACL)**
 
-After uploading my employee-app.zip file to S3, I needed to make it publicly accessible so my EC2 instance could download it as part of the 
-
-**User Data script**.
+After uploading my employee-app.zip file to S3, I needed to make it publicly accessible so my EC2 instance could download it as part of the **User Data script**.
 
 At first, I tried to use the **“Make public using ACL”** option on the file — but it was greyed out.
 

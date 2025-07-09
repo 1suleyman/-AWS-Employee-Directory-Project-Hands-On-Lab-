@@ -369,7 +369,7 @@ python3 application.py
 - [x] Access the app via the EC2 public IP address
 ---
 
-### 🧭 What Just Happened (My Summary)
+**🧭 What Just Happened (My Summary)**
 
 After launching my EC2 instance, I tried accessing the app using the public IP address — but I hit this error:
 
@@ -447,8 +447,63 @@ After correcting my User Data script and launching a fresh instance (`employee-d
 
 ## 🌐 Module 3: VPC Networking + Re-deploy
 
-!-- Custom VPC, subnets, IGW, route tables, and app redeployment --
-🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
+#### 🛠️ VPC Setup
+- [x] Created custom VPC: `app-vpc`
+  - CIDR block: `10.1.0.0/16`
+
+#### 🧱 Subnet Configuration
+- [x] Created four subnets with non-overlapping ranges:
+  - `Public Subnet 1` → `10.1.1.0/24` (AZ: `e.g. us-west-2a`)
+  - `Private Subnet 1` → `10.1.2.0/24` (AZ: `e.g. us-west-2a`)
+  - `Public Subnet 2` → `10.1.3.0/24` (AZ: `e.g. us-west-2b`)
+  - `Private Subnet 2` → `10.1.4.0/24` (AZ: `e.g. us-west-2b`)
+
+#### 🌐 Internet Gateway
+- [x] Created and attached Internet Gateway: `app-igw`
+  - Attached to `app-vpc`
+
+#### 🧭 Public Route Table
+- [x] Created route table: `public-route-table`
+  - Destination: `0.0.0.0/0` → Target: Internet Gateway
+  - Associated with:
+    - `Public Subnet 1`
+    - `Public Subnet 2`
+
+> ✅ Reminder: Subnets are only considered "public" if they are associated with a route table that connects them to an Internet Gateway.
+
+### 🔁 Relaunching the Employee Directory App in New VPC
+
+#### 🔄 EC2 Re-deployment Steps
+- [x] Navigated to EC2 → Selected existing instance → Actions → **Launch more like this**
+- [x] Updated name: `Employee Directory App 2`
+- [x] Selected:
+  - AMI: Amazon Linux 2
+  - Instance type: `t2.micro`
+  - Proceed without key pair
+- [x] Selected **new VPC**: `app-vpc`
+- [x] Subnet: `Public Subnet 1`
+- [x] Enabled Auto-assign Public IP
+
+#### 🔒 Security Group (new)
+- [x] Created new security group for `app-vpc`
+  - Inbound rules:
+    - HTTP (port 80) from anywhere
+    - HTTPS (port 443) from anywhere
+
+#### 🔐 IAM Role
+- [x] Verified IAM role `EmployeeWebAppRole` was prepopulated in launch wizard
+
+#### 🧾 User Data (prepopulated)
+- [x] Confirmed launch script includes:
+  - S3 download
+  - Python/Flask installation
+  - DynamoDB/S3 setup
+  - Running on port 80
+
+#### ✅ Validation
+- [x] Waited for EC2 instance checks to pass
+- [x] Accessed application via public IP
+  - ✅ Employee Directory loaded successfully inside custom VPC
 
 ---
 

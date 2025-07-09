@@ -501,6 +501,93 @@ After correcting my User Data script and launching a fresh instance (`employee-d
 
 > ✅ Reminder: Subnets are only considered "public" if they are associated with a route table that connects them to an Internet Gateway.
 
+**🔄 Preparing the Flask App for EC2 Deployment**
+
+Since I didn’t have access to the original employee-app.zip used in the AWS Technical Essentials course, I decided to recreate the Flask application myself using Gemini. My goal was to:
+
+- 🎯 Recreate the employee directory app structure locally
+- 📦 Zip it and upload to my own S3 bucket
+- 📝 Reference it in EC2 User Data script
+- 🚀 Relaunch the app into my custom VPC using Amazon EC2
+
+**📁 Step 1: Build the Flask App Locally** 
+
+I used Gemini to generate a simple Flask app that includes:
+
+```
+employee-app/
+├── application.py
+├── requirements.txt
+├── templates/
+│   └── index.html
+├── static/
+    └── style.css
+```
+
+**🗜️ Step 2: Zip the Application**
+
+```bash
+cd employee-app
+zip -r employee-app.zip .
+```
+
+This creates a employee-app.zip file with all the necessary code and folders inside.
+
+**☁️ Step 3: Upload to Amazon S3**
+
+1. Go to the S3 console
+2. Select your existing bucket (e.g. employee-photo-bucket-sr963)
+2. Click Upload and add your employee-app.zip file
+4. After uploading, click the file and copy the Object URL, for example:
+
+```bash
+https://employee-photo-bucket-sr963.s3.amazonaws.com/employee-app.zip
+```
+
+**📝 Step 4: Update the EC2 User Data Script**
+
+Update the launch script to pull your real .zip file from S3:
+
+```bash
+#!/bin/bash
+cd /home/ec2-user
+wget https://employee-photo-bucket-sr963.s3.amazonaws.com/employee-app.zip
+unzip employee-app.zip
+cd employee-app
+yum install python3 -y
+pip3 install -r requirements.txt
+yum install stress -y
+export PHOTOS_BUCKET=employee-photo-bucket-sr963
+export AWS_DEFAULT_REGION=us-west-2
+export DYNAMO_MODE=on
+python3 application.py
+```
+
+✅ Replace the bucket name and S3 URL with your own.
+
+**🚀 Step 5: Relaunch EC2 with Updated Script**
+
+In the AWS EC2 Console:
+
+1. Go to Instances → Select a previous instance → Click Launch more like this
+2. Rename it: employee-directory-app-flask
+3. Choose:
+  - VPC: app-vpc
+  - Subnet: Public Subnet 1 or 2
+  - Auto-assign Public IP: ✅ Enabled
+4. Paste your updated User Data into the Advanced Details section
+5. Select a security group that allows:
+  - HTTP (port 80) from anywhere
+
+**✅ Step 6: Validate Everything Works**
+
+- [x] After instance launch and health checks:
+- [x] Visit http://<EC2 Public IP> in browser
+- [x] Confirm Flask app loads correctly
+- [x] Add dummy employee data
+- [x] Verify image saved to S3 bucket
+- [x] Verify data stored in DynamoDB table
+
 ### 🔁 Relaunching the Employee Directory App in New VPC
 
 #### 🔄 EC2 Re-deployment Steps
@@ -523,17 +610,6 @@ After correcting my User Data script and launching a fresh instance (`employee-d
 #### 🔐 IAM Role
 - [x] Verified IAM role `EmployeeWebAppRole` was prepopulated in launch wizard
 
-#### 🧾 User Data (prepopulated)
-- [x] Confirmed launch script includes:
-  - S3 download
-  - Python/Flask installation
-  - DynamoDB/S3 setup
-  - Running on port 80
-
-#### ✅ Validation
-- [x] Waited for EC2 instance checks to pass
-- [x] Accessed application via public IP
-  - ✅ Employee Directory loaded successfully inside custom VPC
 
 ---
 

@@ -535,14 +535,119 @@ This creates a employee-app.zip file with all the necessary code and folders ins
 
 **☁️ Step 3: Upload to Amazon S3**
 
-1. Go to the S3 console
-2. Select your existing bucket (e.g. employee-photo-bucket-sr963)
-2. Click Upload and add your employee-app.zip file
-4. After uploading, click the file and copy the Object URL, for example:
+---
+- [x] Go to the S3 console
+---
+
+![Screenshot 2025-07-09 at 12 09 14](https://github.com/user-attachments/assets/a13ea044-d577-44dd-a69c-e894abd878fc)
+
+---
+- [x] Click Create bucket
+  - Give it a unique name (e.g. employee-flask-app)
+  - Choose the same Region as your EC2 instance (e.g. eu-west-2)
+  - Leave the default settings (Block public access ON is fine for now)
+---
+
+![Screenshot 2025-07-09 at 12 20 31](https://github.com/user-attachments/assets/718d8778-384f-4687-9695-d14437383b58)
+
+**🔐 Making My S3 Zip File Public for EC2 User Data**
+When I got to this stage, I asked myself:
+
+< “Do I need to disable Block Public Access in my S3 bucket to let EC2 download my employee-app.zip file using wget?”
+
+After a bit of digging, here’s what I learned 👇
+
+**✅ Yes — if I want EC2 to download the file using a public URL**
+By default, S3 buckets block all public access, which is great for security — but that also means my EC2 instance won’t be able to download my file using:
 
 ```bash
-https://employee-photo-bucket-sr963.s3.amazonaws.com/employee-app.zip
+wget https://my-bucket-name.s3.amazonaws.com/employee-app.zip
 ```
+
+Unless I explicitly make that file public, the download will silently fail during the launch process.
+
+---
+- [x] Open the newly created bucket
+---
+
+![Screenshot 2025-07-09 at 12 21 40](https://github.com/user-attachments/assets/0d1fba15-81ec-4b6e-9d78-51632a043f9f)
+
+---
+- [ ] Click Upload → Add files
+  - Upload your employee-app.zip file
+  - Opened the Object actions dropdown
+  - Chose **"Make public"** to allow access only to that specific file
+
+**🔓 Making My employee-app.zip Public in S3 (So EC2 Can Download It)**
+
+When I uploaded my employee-app.zip file to S3, I wanted to make it publicly accessible so that my EC2 instance could download it using wget in the User Data script.
+
+![Screenshot 2025-07-09 at 12 27 42](https://github.com/user-attachments/assets/f0e4067b-5518-442d-8a0e-e299892cf8e1)
+
+At first, I tried to use the **“Make public using ACL”** option — but it was greyed out. That’s when I realized the bucket was created with Block all public access enabled by default, which also disables public ACLs.
+
+**🛠️ Making employee-app.zip Public (Using a Bucket Policy Instead of ACL)**
+
+After uploading my employee-app.zip file to S3, I needed to make it publicly accessible so my EC2 instance could download it as part of the 
+
+**User Data script**.
+
+At first, I tried to use the **“Make public using ACL”** option on the file — but it was greyed out.
+
+So here’s what I did instead:
+
+**🔐 Adjusting Bucket Permissions (via Policy)**
+
+1. I went to the Permissions tab of the bucket.
+2. Clicked Edit under Block Public Access (bucket settings).
+3. I unchecked this one setting:
+
+```
+Block public and cross-account access to buckets and objects through any public bucket or access point policies
+```
+
+< This setting was preventing even valid bucket policies from allowing public access.
+
+4. Then I scrolled to the **Bucket Policy** section and added the following:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadForObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::employee-flask-app/employee-app.zip"
+    }
+ ]
+}
+```
+
+5. I saved the changes and copied the **Object URL** for the file (found under the file’s details).
+6. Finally, I opened a **private/incognito browser tab**, pasted the URL, and… ✅ it worked! The browser downloaded the .zip file with no errors.
+
+This confirms that the file is now publicly accessible **(only that one file)** — and I’m ready to use this link inside my EC2 User Data script.
+
+---
+
+![Screenshot 2025-07-09 at 12 22 35](https://github.com/user-attachments/assets/58d04fec-fe8e-47e8-81f3-0daeb2a1c2c3)
+
+---
+- [ ] After upload completes:
+  - Click on the file
+  - Under Object URL, copy the link — for example:
+---
+
+```bash
+https://employee-flask-app.s3.amazonaws.com/employee-app.zip
+```
+**🎯 Why This Works:**
+This lets my EC2 instance pull the zip file with wget during boot, **without making the whole bucket public.**
+Just one secure, targeted object permission — clean and minimal.
+
+Now I’m ready to paste that URL into the EC2 **User Data script** for the next step!
 
 **📝 Step 4: Update the EC2 User Data Script**
 
@@ -576,17 +681,17 @@ In the AWS EC2 Console:
   - Subnet: Public Subnet 1 or 2
   - Auto-assign Public IP: ✅ Enabled
 4. Paste your updated User Data into the Advanced Details section
-5. Select a security group that allows:
-  - HTTP (port 80) from anywhere
+- [x] Created new security group for `app-vpc`
+  - Inbound rules:
+    - HTTP (port 80) from anywhere
+    - HTTPS (port 443) from anywhere
 
 **✅ Step 6: Validate Everything Works**
 
 - [x] After instance launch and health checks:
 - [x] Visit http://<EC2 Public IP> in browser
 - [x] Confirm Flask app loads correctly
-- [x] Add dummy employee data
-- [x] Verify image saved to S3 bucket
-- [x] Verify data stored in DynamoDB table
+
 
 ### 🔁 Relaunching the Employee Directory App in New VPC
 
@@ -600,12 +705,6 @@ In the AWS EC2 Console:
 - [x] Selected **new VPC**: `app-vpc`
 - [x] Subnet: `Public Subnet 1`
 - [x] Enabled Auto-assign Public IP
-
-#### 🔒 Security Group (new)
-- [x] Created new security group for `app-vpc`
-  - Inbound rules:
-    - HTTP (port 80) from anywhere
-    - HTTPS (port 443) from anywhere
 
 #### 🔐 IAM Role
 - [x] Verified IAM role `EmployeeWebAppRole` was prepopulated in launch wizard

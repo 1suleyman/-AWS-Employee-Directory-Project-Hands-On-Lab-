@@ -1,4 +1,0 @@
-# /employee-app/requirements.txt
-Flask
-boto3
-request

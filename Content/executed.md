@@ -931,24 +931,57 @@ FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
 ## 📈 Module 6: Monitoring & Auto Scaling
 
 #### 🚀 EC2 Relaunch for Load Balancing Setup
+---
 - [x] Cloned latest app instance: `employee-directory-app-dynamodb`
 - [x] Renamed new instance: `employee-directory-app-lb`
 - [x] Verified:
   - ✅ Public IP: Enabled
   - ✅ IAM Role: `EmployeeWebAppRole`
   - ✅ User data: Correct S3 bucket + region
+---
+
+![Screenshot 2025-07-10 at 15 21 41](https://github.com/user-attachments/assets/b417be7e-6200-4ae6-a0aa-7f7fcab4664d)
+
+---
 - [x] Launched instance & confirmed 2/2 health checks
+---
+
+![Screenshot 2025-07-10 at 15 24 34](https://github.com/user-attachments/assets/fda10185-390d-4270-a0d6-9c461d83cac6)
+
+---
 - [x] Tested app endpoint manually to confirm it's functional
+---
+
+![Screenshot 2025-07-10 at 15 24 10](https://github.com/user-attachments/assets/b81ecd1d-5069-427c-9795-34d40c6e51a0)
 
 #### 🌐 Application Load Balancer Setup
+---
 - [x] Navigated to EC2 → Load Balancers → **Create Application Load Balancer**
+---
+![Screenshot 2025-07-10 at 15 25 46](https://github.com/user-attachments/assets/208e8231-5b49-4850-9152-8a33ee8d5578)
+
+---
 - [x] Name: `app-elb`
 - [x] Configuration:
   - ✅ Internet-facing
   - ✅ VPC: `app-vpc`
-  - ✅ Availability Zones: `us-west-2a`, `us-west-2b`
+  - ✅ Availability Zones: `eu-west-2a`, `eu-west-2b`
+---
+
+![Screenshot 2025-07-10 at 15 27 29](https://github.com/user-attachments/assets/13fa9e96-1737-426b-b0fd-1a24f046a880)
+
+![Screenshot 2025-07-10 at 15 28 19](https://github.com/user-attachments/assets/536aba9b-25e5-4ac0-9fbe-8419c171e2bf)
+
+![Screenshot 2025-07-10 at 15 28 33](https://github.com/user-attachments/assets/1089d14c-bf84-424d-8073-266c64e685ac)
+
+---
 - [x] Created Security Group: `load-balancer-sg`
   - ✅ Inbound: Allow HTTP (port 80) from anywhere
+---
+
+![Screenshot 2025-07-10 at 15 32 09](https://github.com/user-attachments/assets/60b73c1b-aaf8-4759-b7f5-24195dedf2d2)
+
+---
 - [x] Listener:
   - ✅ Target group type: **Instance**
   - ✅ Target group name: `app-target-group`
@@ -957,36 +990,111 @@ FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
     - Path: `/`
     - Thresholds: Healthy = 2, Unhealthy = 5
     - Timeout: 30s, Interval: 40s
+---
+![Screenshot 2025-07-10 at 15 35 58](https://github.com/user-attachments/assets/5fc9e33a-4ecd-4459-8dfc-2b8625bae127)
+
+![Screenshot 2025-07-10 at 15 36 25](https://github.com/user-attachments/assets/77c920a7-4978-4582-9ef9-a903752bc79c)
+
+![Screenshot 2025-07-10 at 15 36 53](https://github.com/user-attachments/assets/7026f950-e581-4782-a957-0461268079c5)
+
+![Screenshot 2025-07-10 at 15 37 30](https://github.com/user-attachments/assets/7842280d-7717-497a-8413-9b0b675a6e89)
+
+---
 - [x] Registered target: `employee-directory-app-lb` instance
+---
+![Screenshot 2025-07-10 at 15 38 24](https://github.com/user-attachments/assets/289ffad6-a74c-483e-97a6-acd34fe07e2c)
+
+---
 - [x] Load balancer became **Active**
+---
+![Screenshot 2025-07-10 at 15 40 23](https://github.com/user-attachments/assets/c7df228c-c271-4807-b244-18d7f5e6b923)
+
+---
 - [x] Copied DNS endpoint → Confirmed application accessible via ALB
+---
+
+![Screenshot 2025-07-10 at 15 45 09](https://github.com/user-attachments/assets/d7775318-c66c-4a87-841f-96c55adfaacd)
+
+![Screenshot 2025-07-10 at 15 45 57](https://github.com/user-attachments/assets/3f4a28f2-617b-42fd-9ad8-cf93531ceb66)
 
 #### 📄 Launch Template for Auto Scaling
-- [x] Created Launch Template: `app-launch-template`
+---
+- [x] Created Launch Template: `app-launch-template-employee-app`from employee-directory-app-lb instance
   - ✅ Instance type: `t2.micro` (Free Tier)
-  - ✅ Network: `app-vpc` + Web SG
+  - ✅ Network: app sg
   - ✅ IAM Role: `EmployeeWebAppRole`
   - ✅ User data: Updated with correct bucket & region
 - [x] Verified: Launch template ready for Auto Scaling group
+---
+
+![Screenshot 2025-07-10 at 15 49 00](https://github.com/user-attachments/assets/4edb8eda-70c6-4731-9f69-dced95cfd05e)
+
+![Screenshot 2025-07-10 at 16 05 12](https://github.com/user-attachments/assets/c824cbff-8f8a-4ab9-9205-7e3111a08e24)
+
 
 #### 📈 Auto Scaling Group (ASG) Setup
+---
 - [x] Created ASG: `app-asg` using launch template
+---
+![Screenshot 2025-07-10 at 16 35 44](https://github.com/user-attachments/assets/bb112014-43bc-4fa7-a535-0164bd070c67)
+
+---
 - [x] Configured:
   - ✅ VPC: `app-vpc`
   - ✅ Subnets: `Public Subnet 1` + `Public Subnet 2`
   - ✅ Load Balancer Target Group: `app-target-group`
   - ✅ Health Check Type: ELB
+---
+![Screenshot 2025-07-10 at 16 36 49](https://github.com/user-attachments/assets/29cb8411-f88c-4faf-b8e5-a81f81462974)
+
+![Screenshot 2025-07-10 at 16 37 19](https://github.com/user-attachments/assets/a48bd6f2-a445-4279-9003-7415d58ce890)
+
+![Screenshot 2025-07-10 at 16 37 49](https://github.com/user-attachments/assets/3bb00e9c-5ba2-4793-afe7-fdf4acb48474)
+
+---
 - [x] Set group size:
   - ✅ Desired: 2
   - ✅ Min: 2
   - ✅ Max: 4
+---
+![Screenshot 2025-07-10 at 16 38 18](https://github.com/user-attachments/assets/1af18e57-57cd-485d-90c9-668284d8953b)
+
+![Screenshot 2025-07-10 at 16 39 15](https://github.com/user-attachments/assets/59a2e65b-b515-420b-95dc-381876e551bb)
+
+---
 - [x] Target tracking scaling policy:
   - ✅ Metric: Avg CPU utilization
   - ✅ Threshold: 60%
   - ✅ Warm-up: 300s
+---
+
+![Screenshot 2025-07-10 at 16 39 35](https://github.com/user-attachments/assets/dd384e0b-9e78-418f-87fb-fb69655b49da)
+
+![Screenshot 2025-07-10 at 16 41 51](https://github.com/user-attachments/assets/ca1d5609-e2ed-4372-9174-799dcb3ad4ca)
 
 #### 🔁 Testing Auto Scaling
+----
 - [x] Appended `/info` to ALB DNS to verify instance routing
 - [x] Used `/stress-cpu?duration=10m` to simulate load
+---
+![Screenshot 2025-07-10 at 16 49 41](https://github.com/user-attachments/assets/806c9e3f-26ba-4dd3-9f4f-b22a44431055)
+
+![Screenshot 2025-07-10 at 16 51 26](https://github.com/user-attachments/assets/32e4efd6-9cde-407c-8113-c6f1f4aa0bcd)
+
+I stressed the cpu for 5 mins, this is going to allow me to stress my CPU to get it above that 60 percent threshold and launch new instances. 
+
+As result 2 new instances was launched in response to the scaling action that is happening because of the CPU stress that I initiated.
+
+So these instances will be launched and then they will be added to the group of instances that are part of the entire fleet.
+
+![Screenshot 2025-07-10 at 16 52 33](https://github.com/user-attachments/assets/e60a41af-0722-450b-9585-1e812dc31b14)
+
+---
 - [x] Monitored Target Group health
+---
+![Screenshot 2025-07-10 at 16 49 19](https://github.com/user-attachments/assets/7ef60701-4c73-4a87-957e-a875eee206c6)
+
+---
 - [x] ✅ Observed Auto Scaling: 2 new EC2 instances launched
+---
+![Screenshot 2025-07-10 at 16 48 39](https://github.com/user-attachments/assets/27d20771-3d75-447b-998c-50859f4a2cf6)

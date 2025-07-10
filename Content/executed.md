@@ -1094,9 +1094,6 @@ So these instances will be launched and then they will be added to the group of 
 ---
 ![Screenshot 2025-07-10 at 16 49 19](https://github.com/user-attachments/assets/7ef60701-4c73-4a87-957e-a875eee206c6)
 
-Okay, here's your project cleanup checklist formatted as a `README.md` file.
-
-```markdown
 # AWS 3-Tier Employee Directory Application - My Cleanup Checklist
 
 Welcome to the personal cleanup log for my "AWS 3-Tier Employee Directory Web Application Project." This document details all the AWS resources I created and then deleted to ensure my AWS account remains cost-effective and secure.

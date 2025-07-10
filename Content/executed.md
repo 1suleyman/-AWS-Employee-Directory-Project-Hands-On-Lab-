@@ -1093,3 +1093,107 @@ So these instances will be launched and then they will be added to the group of 
 - [x] Monitored Target Group health
 ---
 ![Screenshot 2025-07-10 at 16 49 19](https://github.com/user-attachments/assets/7ef60701-4c73-4a87-957e-a875eee206c6)
+
+Okay, here's your project cleanup checklist formatted as a `README.md` file.
+
+```markdown
+# AWS 3-Tier Employee Directory Application - My Cleanup Checklist
+
+Welcome to the personal cleanup log for my "AWS 3-Tier Employee Directory Web Application Project." This document details all the AWS resources I created and then deleted to ensure my AWS account remains cost-effective and secure.
+
+## Why I Deleted My Resources
+
+* **Cost Savings:** I know AWS charges for running resources, even when they're idle. Deleting everything ensures I don't incur unexpected bills.
+* **Security Best Practice:** Unused infrastructure, especially internet-facing components, can pose potential security risks if left unmonitored. I always aim to tear down resources I no longer actively need.
+* **Clean Environment:** This helps me keep my AWS account organized and clutter-free for future projects.
+
+My project screenshots in this GitHub repository are more than enough to showcase my work; I don't need to keep the live infrastructure running.
+
+---
+
+## Important Notes Before Deleting
+
+* **Verified Documentation:** I made sure I captured all necessary screenshots and updated my project's documentation (my build journal) to fully showcase my work before proceeding with deletion.
+* **Dependencies:** I followed the recommended order of deletion to avoid "resource in use" errors caused by dependencies between services.
+
+---
+
+## My Detailed Cleanup Checklist
+
+Here's the step-by-step process I followed to delete my AWS resources:
+
+### 1. Auto Scaling & Load Balancing (Module 6)
+
+* **Auto Scaling Group (ASG):**
+    * I deleted `app-asg`.
+    * *(Deleting the ASG automatically terminated any EC2 instances it had launched.)*
+* **Launch Template:**
+    * I deleted `app-launch-template-employee-app`.
+* **Application Load Balancer (ALB):**
+    * I deleted `app-elb`.
+* **Target Group:**
+    * I deleted `app-target-group`.
+* **Any manually launched EC2 Instances associated with the ALB:**
+    * If `employee-directory-app-lb` was launched manually before the ASG, I terminated it directly.
+
+### 2. EC2 Instances (Modules 2, 3, 4, 5)
+
+* **I terminated all other individual EC2 instances I launched manually throughout the project that were still running:**
+    * `employee-directory-app`
+    * `employee-directory-app-2` (static site demo)
+    * `employee-directory-app-networking-module`
+    * `employee-directory-app-s3`
+    * `employee-directory-app-dynamodb`
+    * *(I checked my EC2 Instances page for any other instances named during my project that weren't managed by the ASG.)*
+* **Elastic IPs:**
+    * If I had manually allocated any Elastic IP addresses, I made sure to **release them**. (Ephemeral public IPs disappear with the instance anyway.)
+* **EBS Volumes:**
+    * I confirmed no detached EBS volumes were left behind. (They usually get deleted with the instance unless specified otherwise.)
+
+### 3. Databases (Module 5)
+
+* **DynamoDB Table:**
+    * I deleted the `Employees` table.
+
+### 4. Storage (Module 3 & 4)
+
+* **S3 Bucket:** `employee-flask-app` (where I uploaded `employee-app.zip`)
+    * **ACTION:** I **emptied the bucket first** (deleted all objects inside it), then I deleted the bucket itself.
+* **S3 Bucket:** `employee-photo-bucket-456s` (for profile photos)
+    * **ACTION:** I **emptied the bucket first** (deleted all objects inside it), then I deleted the bucket itself.
+    * *(The custom bucket policy I created on this bucket was deleted automatically when the bucket was deleted.)*
+
+### 5. Networking (Module 2 & 3)
+
+* **Security Groups:**
+    * I deleted `app-sg` (my main application security group).
+    * I deleted `load-balancer-sg` (for the ALB).
+    * *(I ensured no EC2 instances or ELBs were still using these Security Groups before attempting deletion.)*
+* **Internet Gateway:**
+    * I deleted `app-igw`.
+    * **ACTION:** I had to **detach it from `app-vpc` first.**
+* **Route Table:**
+    * I deleted `public-route-table`.
+* **Subnets:**
+    * I deleted `Public Subnet 1`.
+    * I deleted `Private Subnet 1`.
+    * I deleted `Public Subnet 2`.
+    * I deleted `Private Subnet 2`.
+* **Custom VPC:**
+    * I deleted `app-vpc`.
+    * **ACTION:** This was the **LAST** networking component I deleted. All associated subnets, route tables, and the Internet Gateway had to be deleted or disassociated first.
+* *(I made sure NOT to delete the "default" VPC or its components, as that's part of my base AWS environment.)*
+
+### 6. IAM (Module 1)
+
+* **IAM Users:**
+    * I deleted `AdminUser`.
+    * I deleted `DevUser`.
+* **IAM Group:**
+    * I deleted `EC2Admins`.
+* **IAM Role:**
+    * I deleted `EmployeeWebAppRole`.
+    * **ACTION:** I ensured no EC2 instances or other services were still using this role before deleting it.
+* **Custom IAM Policies:**
+    * I deleted any custom IAM policies I created and attached to `EmployeeWebAppRole` (e.g., `EmployeeWebAppDynamoDBAccessPolicy`, `EmployeeWebAppS3DynamoDBAccess`, or `EmployeeWebAppS3DynamoDBPermissions`). I went to **IAM > Policies** to find and delete them.
+    * *(I made sure NOT to delete AWS managed policies like `AmazonS3FullAccess` or `AmazonDynamoDBFullAccess`.)*

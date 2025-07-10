@@ -860,8 +860,71 @@ FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
 ---
 ## 🗄️ Module 5: Database (DynamoDB Integration)
 
-!-- DynamoDB table creation, full CRUD test via app --
-🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
+#### 🧪 EC2 Relaunch for Database Integration
+---
+- [x] Cloned most recent S3-enabled EC2 instance:
+  - Used **Launch more like this** on `employee-directory-app-s3`
+  - Renamed to: `employee-directory-app-dynamodb`
+---
+
+![Screenshot 2025-07-10 at 14 14 29](https://github.com/user-attachments/assets/f946968e-4db1-46f8-b7e6-bd9fda52dfac)
+
+---
+- [x] Verified key settings:
+  - ✅ IAM Role: `EmployeeWebAppRole`
+  - ✅ Auto-assign Public IP: Enabled
+  - ✅ User data script includes correct S3 bucket name
+---
+---
+- [x] Launched instance and waited for **2/2 status checks**
+---
+
+![Screenshot 2025-07-10 at 14 19 02](https://github.com/user-attachments/assets/421dea7e-be9e-4263-99fe-729b8932490c)
+
+#### 🧭 Amazon DynamoDB Table Setup
+---
+- [x] Navigated to **DynamoDB** console → Clicked **Create Table**
+---
+
+![Screenshot 2025-07-10 at 14 18 12](https://github.com/user-attachments/assets/73af1f20-6c62-4ec2-9900-dc9b7dbbce34)
+
+---
+- [x] Table name: `Employees`
+- [x] Partition key: `id` (String)
+- [x] Used all default settings → Clicked **Create Table**
+---
+
+![Screenshot 2025-07-10 at 14 21 09](https://github.com/user-attachments/assets/f4e75111-b8b2-458c-b2c3-bf342602820b)
+
+#### ✅ Application Test: End-to-End Integration
+---
+- [x] Opened new EC2 public IP in browser
+- [x] Verified application was running
+- [x] Added employee entry via UI form:
+  - ✅ Name, Location, Job Title, Badges, and Photo
+  - ✅ Clicked **Save** and confirmed employee added to directory
+---
+
+![Screenshot 2025-07-10 at 14 24 45](https://github.com/user-attachments/assets/c9cdd388-bbd3-4eb0-97e1-3ee6c6ad78d5)
+
+#### 📂 Verification: Data Stored in S3 and DynamoDB
+---
+- [x] Opened S3 Bucket → Confirmed new object (photo) uploaded
+---
+
+![Screenshot 2025-07-10 at 14 26 37](https://github.com/user-attachments/assets/a6e16c0e-427b-4594-b3de-adcd037af9ac)
+
+---
+- [x] Opened DynamoDB Table → Explored items
+  - ✅ Entry with employee info
+  - ✅ Correct `id`, `name`, `badges`, and `objectKey` fields present
+---
+
+![Screenshot 2025-07-10 at 14 29 09](https://github.com/user-attachments/assets/4858d4fe-f019-4e6d-a125-0b9b6df30146)
+
+#### 🧹 Cleanup
+- [x] Stopped `employee-directory-app-dynamodb` EC2 instance to avoid charges
+- [x] DynamoDB Table left running (ready for next module)
 
 ---
 

@@ -734,11 +734,130 @@ Sometimes, instead of debugging generated code for hours, a simple Google search
 
 ## 💾 Module 4: Storage (S3 Integration)
 
-!-- S3 bucket creation, bucket policy, EC2 app update, test upload --
-🧹 **Optional:** Finish each module with cleanup steps to avoid unexpected AWS charges!
-
+#### 🪣 S3 Bucket Creation & Object Upload
+---
+- [x] Created S3 bucket: `employee-photo-bucket-456s`
+  - Region: `eu-west-2` (same as rest of app)
+  - Default settings retained (no public access)
 ---
 
+![Screenshot 2025-07-10 at 10 07 44](https://github.com/user-attachments/assets/bdb038f2-0f2b-4397-94e8-bebac8168c44)
+
+---
+- [x] Uploaded test image to validate bucket
+  - Used GUI Upload → `employee2.jpg`
+  - Verified success in S3 console
+---
+
+![Screenshot 2025-07-10 at 10 10 27](https://github.com/user-attachments/assets/0807e89e-dd8a-4ce5-ab45-7e5e79c530e0)
+
+![Screenshot 2025-07-10 at 10 10 44](https://github.com/user-attachments/assets/055b577c-bce3-4bbe-9954-dfcf83438493)
+
+#### 🔐 Bucket Policy Configuration
+---
+- [x] Navigated to **Permissions** tab → Edited **Bucket Policy**
+---
+
+![Screenshot 2025-07-10 at 10 11 48](https://github.com/user-attachments/assets/995e0007-1e47-4675-98a0-3932866001e0)
+
+---
+- [x] Customized IAM policy:
+  - Replaced `INSERT-ACCOUNT-NUMBER` with actual account number
+  - Replaced `INSERT-BUCKET-NAME` with actual bucket name
+  - Removed `<>` brackets
+- [x] Saved policy to allow access from EC2 via IAM Role (`EmployeeWebAppRole`)
+---
+
+**To find the account number Using the AWS Management Console:**
+1. Sign in: Access the AWS Management Console using your AWS credentials.
+2. Navigate to Support Center: Find and click on the "Support" menu, then select "Support Center".
+3. Locate Account ID: Your AWS account ID is displayed prominently at the top of the Support Center page.
+
+**To find the buckect number** 
+- it should be right above the policy code, under the title **"Bucket ARN"**
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowS3ReadAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<INSERT-ACCOUNT-NUMBER>:role/EmployeeWebAppRole"
+      },
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::<INSERT-BUCKET-NAME>",
+        "arn:aws:s3:::<INSERT-BUCKET-NAME>/*"
+      ]
+    }
+  ]
+}
+```
+
+![Screenshot 2025-07-10 at 11 50 25](https://github.com/user-attachments/assets/30ab0e10-1fa8-4bda-acc9-ae405ea0bffc)
+
+#### 🔁 EC2 Relaunch: App Configured to Use S3
+---
+- [x] Cloned existing EC2 instance
+  - Used **Launch more like this** on stopped instance
+  - Renamed to: `employee-directory-app-s3`
+---
+
+![Screenshot 2025-07-10 at 11 52 22](https://github.com/user-attachments/assets/68584f44-9946-46f9-ace6-b61772ad40c3)
+
+I then got an error informing me " (Error: The selected EC2 instance must be running.) " **Good to know!**
+
+![Screenshot 2025-07-10 at 11 53 46](https://github.com/user-attachments/assets/bea98e88-3cf7-4b53-9fb6-64e00920fac4)
+
+![Screenshot 2025-07-10 at 11 56 29](https://github.com/user-attachments/assets/c5a5c6b8-6425-4f71-9aa2-52287d4467f3)
+
+---
+- [x] Verified:
+  - Same AMI and instance type (`t2.micro`)
+  - Auto-assign Public IP → **Enabled**
+  - IAM Role pre-populated: `EmployeeWebAppRole`
+---
+---
+#### ⚙️ User Data Configuration
+- [x] Updated EC2 user data with S3 bucket name
+  - Set environment variable: `PHOTOS_BUCKET=employee-photo-bucket-456s`
+  - Launch script pulls app files from S3 and installs dependencies
+---
+```bash
+#!/bin/bash -ex 
+wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/DEV-AWS-MO-GCNv2/FlaskApp.zip 
+unzip FlaskApp.zip 
+cd FlaskApp/ 
+yum -y install python3 
+yum -y install python3-pip 
+pip install -r requirements.txt 
+yum -y install stress 
+export PHOTOS_BUCKET=employee-photo-bucket-456s
+export AWS_DEFAULT_REGION=eu-west-2
+export DYNAMO_MODE=on 
+FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
+```
+
+#### ✅ Validation
+---
+- [x] Waited for EC2 status checks → **2/2 checks passed**
+- [x] Opened public IP in browser
+  - ✅ Application launched successfully with S3 bucket integration
+  - ❗ Note: Database (DynamoDB) not yet configured for interaction
+---
+
+![Screenshot 2025-07-10 at 12 01 45](https://github.com/user-attachments/assets/61d80f11-692d-48f4-9ec0-c41cd8ac3031)
+
+![Screenshot 2025-07-10 at 12 03 00](https://github.com/user-attachments/assets/c76645a3-353f-4e90-9d95-65f3730fa018)
+
+#### 🧹 Cleanup
+---
+- [x] Stopped demo instance (optional for cost saving)
+---
+
+---
 ## 🗄️ Module 5: Database (DynamoDB Integration)
 
 !-- DynamoDB table creation, full CRUD test via app --

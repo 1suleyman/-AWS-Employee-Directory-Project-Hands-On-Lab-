@@ -1130,22 +1130,14 @@ Here's the step-by-step process I followed to delete my AWS resources:
     * I deleted `app-elb`.
 * **Target Group:**
     * I deleted `app-target-group`.
-* **Any manually launched EC2 Instances associated with the ALB:**
-    * If `employee-directory-app-lb` was launched manually before the ASG, I terminated it directly.
 
 ### 2. EC2 Instances (Modules 2, 3, 4, 5)
 
 * **I terminated all other individual EC2 instances I launched manually throughout the project that were still running:**
-    * `employee-directory-app`
-    * `employee-directory-app-2` (static site demo)
-    * `employee-directory-app-networking-module`
+    * `employee-directory-app-networking-module-6`
     * `employee-directory-app-s3`
     * `employee-directory-app-dynamodb`
     * *(I checked my EC2 Instances page for any other instances named during my project that weren't managed by the ASG.)*
-* **Elastic IPs:**
-    * If I had manually allocated any Elastic IP addresses, I made sure to **release them**. (Ephemeral public IPs disappear with the instance anyway.)
-* **EBS Volumes:**
-    * I confirmed no detached EBS volumes were left behind. (They usually get deleted with the instance unless specified otherwise.)
 
 ### 3. Databases (Module 5)
 
@@ -1184,13 +1176,5 @@ Here's the step-by-step process I followed to delete my AWS resources:
 ### 6. IAM (Module 1)
 
 * **IAM Users:**
-    * I deleted `AdminUser`.
     * I deleted `DevUser`.
-* **IAM Group:**
-    * I deleted `EC2Admins`.
-* **IAM Role:**
-    * I deleted `EmployeeWebAppRole`.
-    * **ACTION:** I ensured no EC2 instances or other services were still using this role before deleting it.
-* **Custom IAM Policies:**
-    * I deleted any custom IAM policies I created and attached to `EmployeeWebAppRole` (e.g., `EmployeeWebAppDynamoDBAccessPolicy`, `EmployeeWebAppS3DynamoDBAccess`, or `EmployeeWebAppS3DynamoDBPermissions`). I went to **IAM > Policies** to find and delete them.
-    * *(I made sure NOT to delete AWS managed policies like `AmazonS3FullAccess` or `AmazonDynamoDBFullAccess`.)*
+

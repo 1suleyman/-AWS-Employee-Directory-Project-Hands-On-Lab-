@@ -1093,8 +1093,3 @@ So these instances will be launched and then they will be added to the group of 
 - [x] Monitored Target Group health
 ---
 ![Screenshot 2025-07-10 at 16 49 19](https://github.com/user-attachments/assets/7ef60701-4c73-4a87-957e-a875eee206c6)
-
----
-- [x] ✅ Observed Auto Scaling: 2 new EC2 instances launched
----
-![Screenshot 2025-07-10 at 16 48 39](https://github.com/user-attachments/assets/27d20771-3d75-447b-998c-50859f4a2cf6)

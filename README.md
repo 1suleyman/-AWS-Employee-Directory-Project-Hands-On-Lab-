@@ -1,24 +1,25 @@
 # 🧑‍💻 AWS 3-Tier Employee Directory Web Application
 
-Welcome to my personal AWS lab project! This repository documents my step-by-step journey through building a **3-Tier Employee Directory Web Application** on AWS, following cloud best practices.
+Welcome to my personal AWS lab project! This repository documents my step-by-step journey building a **3-Tier Employee Directory Web Application** on AWS using cloud architecture best practices.
 
 ---
 
 ## 📌 Project Overview
 
-The goal of this project is to gain hands-on experience designing and deploying a production-style web application using core AWS services.
+The goal of this project was to gain hands-on experience designing, deploying, and scaling a production-style web application using core AWS services.
 
-> 🎯 **Objective**: Build a secure, scalable, and highly available Employee Directory web application on AWS.
+> 🎯 **Objective**: Build a secure, scalable, and highly available Employee Directory web application in the AWS Cloud.
 
 This application is built using:
-- **Amazon EC2** for compute (web server)
-- **Amazon S3** for image storage
-- **Amazon DynamoDB** for employee data
-- **IAM** for user access and instance roles
-- **VPC** for custom networking
-- **Elastic Load Balancer** for distributing traffic
-- **EC2 Auto Scaling** for dynamic instance scaling
-- [Future] **API Gateway + Lambda** for a serverless contact form
+
+- **Amazon EC2** for compute (Flask web server)
+- **Amazon S3** for storing employee profile photos
+- **Amazon DynamoDB** for storing employee data
+- **IAM** for secure user access and instance roles
+- **Amazon VPC** for custom networking and subnet design
+- **Elastic Load Balancer** for distributing web traffic across AZs
+- **EC2 Auto Scaling** for dynamic instance management
+- **[Planned] API Gateway + AWS Lambda** for a future serverless contact form feature
 
 ---
 

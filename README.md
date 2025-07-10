@@ -40,8 +40,67 @@ Quick links to the main learning artifacts in this repo:
 
 ## 🧠 What I Learned
 
-This repo is part of my AWS learning journey as I prepare for real-world cloud infrastructure design and certification.  
-It’s more than just a project — it’s **proof of practice**.
+This repo documents my end-to-end AWS project where I deployed a real-world, scalable web application using core cloud services. It covers networking, security, storage, compute, and automation — built step by step using best practices.
+
+Here’s what I practiced and learned:
+
+---
+
+### ✅ Identity & Access Management (IAM)
+- Enabled MFA on the root user for account protection  
+- Created IAM users (`AdminUser`, `DevUser`) with console and programmatic access  
+- Assigned least-privilege roles and attached managed policies via IAM groups  
+- Created and attached IAM Roles (e.g. `EmployeeWebAppRole`) to EC2 for secure access to S3 and DynamoDB  
+- Learned how IAM Identity Center defaults to `us-east-1` as a global service region
+
+---
+
+### ✅ Compute (Amazon EC2)
+- Launched EC2 instances using Amazon Linux 2023 and Free Tier instance types  
+- Attached IAM roles, security groups, and configured launch scripts (User Data)  
+- Used browser-based EC2 Connect instead of SSH keys for secure access  
+- Debugged failed EC2 app launches by checking `/var/log/cloud-init-output.log`  
+- Used User Data scripts to install dependencies, run Flask, and serve static sites  
+
+---
+
+### ✅ Networking (Amazon VPC)
+- Created a custom VPC (`app-vpc`) with a CIDR block of `10.1.0.0/16`  
+- Created public and private subnets across multiple Availability Zones (AZs) for high availability  
+- Attached an Internet Gateway and associated a route table for public internet access  
+- Verified proper routing setup and subnet association for internet-facing workloads  
+
+---
+
+### ✅ Storage (Amazon S3)
+- Created a private S3 bucket (`employee-photo-bucket-456s`) for photo uploads  
+- Uploaded and tested access to image objects  
+- Wrote and applied a secure bucket policy allowing only EC2 access via IAM role  
+- Validated file uploads using both the app and the S3 console  
+
+---
+
+### ✅ Database (Amazon DynamoDB)
+- Created a `Employees` table with partition key `id`  
+- Connected the app to DynamoDB using environment variables  
+- Tested full-stack integration: photo uploaded to S3, employee data stored in DynamoDB  
+- Confirmed write success via app UI and direct console queries  
+
+---
+
+### ✅ Monitoring & Auto Scaling
+- Set up an **Application Load Balancer (ALB)** across two AZs  
+- Created a **Launch Template** and **Auto Scaling Group (ASG)** for the app  
+- Configured health checks and target groups  
+- Implemented target-tracking scaling based on CPU utilization  
+- Simulated high CPU load using `/stress-cpu` to trigger automatic scaling  
+- Verified that new instances launched and registered automatically under the ALB
+
+---
+
+This project taught me how to design, build, troubleshoot, and scale a full-stack cloud application on AWS. Every decision — from IAM to load balancing — reinforced key concepts used by real cloud engineers and tested in the AWS Certified Cloud Practitioner and Solutions Architect exams.
+
+It’s more than just a demo — it’s **proof of hands-on, production-ready skills**.
 
 ## 📮 Feedback
 
